@@ -18,6 +18,7 @@ import {
   IUser,
   IAllStats,
 } from "../../services/apiTypes";
+import EloChart, {ChartData} from "../../components/eloChart/eloChart";
 
 const formatWinPercentage = (winPer: number) => `${(winPer * 100).toFixed(2)}%`;
 
@@ -130,10 +131,6 @@ const processGames = (
         : currentElo;
     const eloDiff = currentElo - previousElo;
 
-    console.log("currentElo: ", currentElo);
-    console.log("previousElo: ", previousElo);
-    console.log("eloDiff: ", eloDiff);
-
     return {
       ...game,
       eloDiff:
@@ -146,9 +143,17 @@ const processGames = (
   });
 };
 
+const processEloForChart = (
+    games: IGamesResponse,
+    currentPlayer?: string
+): ChartData[] => {
+  return games.map(d => d).reverse().map((game, index) => {
+    return { t: index, elo: game.newElos[currentPlayer ?? ''] }
+  });
+}
+
 const renderRecentGames = (games: IGamesResponse, currentPlayer?: string) => {
   let processedGames: IGameStats[] = [];
-  console.log("games: ", games);
   let filteredGames: any[] = currentPlayer
     ? games.filter(
         (game) =>
@@ -159,7 +164,6 @@ const renderRecentGames = (games: IGamesResponse, currentPlayer?: string) => {
   if (currentPlayer) {
     processedGames = processGames(filteredGames, currentPlayer);
   }
-  console.log("processed games:", processedGames);
 
   return currentPlayer === undefined || games.length === 0 ? (
     <div>No recent games to show</div>
@@ -230,18 +234,24 @@ function PlayerStats() {
       <div className="section">
         <div className="container player-stat-section">
           <div className="columns">
-            <div className="column is-flex">
-              <div className="avatar">
-                <img
-                  className="avatar-image"
-                  src={defaultAvatar}
-                  alt="Player avatar"
-                />
+            <div className="column ml-4">
+              <div className="column is-flex">
+                <div className="avatar">
+                  <img
+                      className="avatar-image"
+                      src={defaultAvatar}
+                      alt="Player avatar"
+                  />
+                </div>
+                <div className="ml-4 player-overview">
+                  <PlayerDetail label="Username">{user?.username}</PlayerDetail>
+                  <PlayerDetail label="Elo">{user?.elo}</PlayerDetail>
+                  <PlayerDetail label="Last Game">{lastGameDate}</PlayerDetail>
+                </div>
               </div>
-              <div className="ml-4 player-overview">
-                <PlayerDetail label="Username">{user?.username}</PlayerDetail>
-                <PlayerDetail label="Elo">{user?.elo}</PlayerDetail>
-                <PlayerDetail label="Last Game">{lastGameDate}</PlayerDetail>
+              <div>
+                <h2 className="has-text-centered has-text-weight-bold">Elo history</h2>
+                <EloChart data={processEloForChart(games ?? [], user?.username)}></EloChart>
               </div>
             </div>
             <div className="column ml-4">
