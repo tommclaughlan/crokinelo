@@ -217,6 +217,21 @@ function PlayerStats() {
       ? formatDate(userStats.results[0].creationDate)
       : "-";
 
+  let setsFor: number = 0;
+  let setsAgainst: number = 0;
+
+  if (games) {
+    setsFor = games.reduce((sum: number, game: IGame) => {
+      const idx = game.teams.findIndex(team => team.find(player => player === user?.username) !== undefined);
+      return sum + game.score[idx];
+    }, 0);
+
+    setsAgainst = games.reduce((sum: number, game: IGame) => {
+      const idx = game.teams.findIndex(team => team.find(player => player === user?.username) === undefined);
+      return sum + game.score[idx];
+    }, 0);
+  }
+
   if (isFetching && !users) {
     return (
       <Page>
@@ -265,9 +280,9 @@ function PlayerStats() {
                 <FormList results={userStats?.results || []} />
               </PlayerDetail>
               <div>
-                <PlayerDetail label="Goals For">-</PlayerDetail>
-                <PlayerDetail label="Goals Against">-</PlayerDetail>
-                <PlayerDetail label="Goal Difference">-</PlayerDetail>
+                <PlayerDetail label="Sets Won">{setsFor}</PlayerDetail>
+                <PlayerDetail label="Sets Lost">{setsAgainst}</PlayerDetail>
+                <PlayerDetail label="Set Difference">{setsFor - setsAgainst}</PlayerDetail>
               </div>
             </div>
           </div>
