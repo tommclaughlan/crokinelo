@@ -7,6 +7,7 @@ const USER_COLLECTION = "users";
 const GAME_COLLECTION = "games";
 
 const elo = new EloRank();
+const K_FACTOR = 50;
 
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";
@@ -114,7 +115,7 @@ async function retrievePlayerDictionaryFromDB(
 export const calculateElos = (results: ReadonlyArray<IResult>) => {
     const kFactor = Math.abs(results[0].score - results[1].score);
 
-    elo.setKFactor(kFactor * 6.4);
+    elo.setKFactor(kFactor * K_FACTOR);
 
     const teamElos = results.map(
         (result) =>
