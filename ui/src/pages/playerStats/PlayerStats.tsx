@@ -18,7 +18,9 @@ import {
   IUser,
   IAllStats,
 } from "../../services/apiTypes";
-import EloChart, {ChartData} from "../../components/eloChart/eloChart";
+import EloChart, { ChartData } from "../../components/eloChart/eloChart";
+
+const STARTING_ELO: number = 1000;
 
 const formatWinPercentage = (winPer: number) => `${(winPer * 100).toFixed(2)}%`;
 
@@ -128,29 +130,27 @@ const processGames = (
     const previousElo =
       index < games.length - 1
         ? games[index + 1].newElos[currentPlayer]
-        : currentElo;
+        : STARTING_ELO;
     const eloDiff = currentElo - previousElo;
 
     return {
       ...game,
-      eloDiff:
-        index === games.length - 1
-          ? "+0"
-          : eloDiff >= 0
-          ? `+${eloDiff}`
-          : `${eloDiff}`,
+      eloDiff: eloDiff >= 0 ? `+${eloDiff}` : `${eloDiff}`,
     };
   });
 };
 
 const processEloForChart = (
-    games: IGamesResponse,
-    currentPlayer?: string
+  games: IGamesResponse,
+  currentPlayer?: string
 ): ChartData[] => {
-  return games.map(d => d).reverse().map((game, index) => {
-    return { t: index, elo: game.newElos[currentPlayer ?? ''] }
-  });
-}
+  return games
+    .map((d) => d)
+    .reverse()
+    .map((game, index) => {
+      return { t: index, elo: game.newElos[currentPlayer ?? ""] };
+    });
+};
 
 const renderRecentGames = (games: IGamesResponse, currentPlayer?: string) => {
   let processedGames: IGameStats[] = [];
@@ -222,12 +222,16 @@ function PlayerStats() {
 
   if (games) {
     setsFor = games.reduce((sum: number, game: IGame) => {
-      const idx = game.teams.findIndex(team => team.find(player => player === user?.username) !== undefined);
+      const idx = game.teams.findIndex(
+        (team) => team.find((player) => player === user?.username) !== undefined
+      );
       return sum + game.score[idx];
     }, 0);
 
     setsAgainst = games.reduce((sum: number, game: IGame) => {
-      const idx = game.teams.findIndex(team => team.find(player => player === user?.username) === undefined);
+      const idx = game.teams.findIndex(
+        (team) => team.find((player) => player === user?.username) === undefined
+      );
       return sum + game.score[idx];
     }, 0);
   }
@@ -253,9 +257,9 @@ function PlayerStats() {
               <div className="column is-flex">
                 <div className="avatar">
                   <img
-                      className="avatar-image"
-                      src={defaultAvatar}
-                      alt="Player avatar"
+                    className="avatar-image"
+                    src={defaultAvatar}
+                    alt="Player avatar"
                   />
                 </div>
                 <div className="ml-4 player-overview">
@@ -265,8 +269,12 @@ function PlayerStats() {
                 </div>
               </div>
               <div>
-                <h2 className="has-text-centered has-text-weight-bold">Elo history</h2>
-                <EloChart data={processEloForChart(games ?? [], user?.username)}></EloChart>
+                <h2 className="has-text-centered has-text-weight-bold">
+                  Elo history
+                </h2>
+                <EloChart
+                  data={processEloForChart(games ?? [], user?.username)}
+                ></EloChart>
               </div>
             </div>
             <div className="column ml-4">
@@ -282,7 +290,9 @@ function PlayerStats() {
               <div>
                 <PlayerDetail label="Sets Won">{setsFor}</PlayerDetail>
                 <PlayerDetail label="Sets Lost">{setsAgainst}</PlayerDetail>
-                <PlayerDetail label="Set Difference">{setsFor - setsAgainst}</PlayerDetail>
+                <PlayerDetail label="Set Difference">
+                  {setsFor - setsAgainst}
+                </PlayerDetail>
               </div>
             </div>
           </div>
