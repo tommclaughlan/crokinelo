@@ -1,0 +1,20 @@
+{
+  "name": "elotester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommclaughlan/crokinelo.git"
+  },
+  "private": true,
+  "dependencies": {
+    "@types/elo-rank": "^1.0.3",
+    "@types/node": "^22.7.2",
+    "elo-rank": "^1.0.4",
+    "mongodb": "^6.9.0"
+  }
+}
