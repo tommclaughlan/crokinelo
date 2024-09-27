@@ -9,8 +9,6 @@ import {
   useFetchUsers,
 } from "../../services/apiService";
 
-import defaultAvatar from "./default-avatar.jpg";
-
 import "./PlayerStats.css";
 import {
   IGamesResponse,
@@ -21,7 +19,7 @@ import {
 import EloChart, { ChartData } from "../../components/eloChart/eloChart";
 import { useMemo } from "react";
 import { createAvatar } from "@dicebear/core";
-import { bottts, lorelei, loreleiNeutral } from "@dicebear/collection";
+import { bottts } from "@dicebear/collection";
 
 const STARTING_ELO: number = 1000;
 
