@@ -19,6 +19,9 @@ import {
   IAllStats,
 } from "../../services/apiTypes";
 import EloChart, { ChartData } from "../../components/eloChart/eloChart";
+import { useMemo } from "react";
+import { createAvatar } from "@dicebear/core";
+import { bottts, lorelei, loreleiNeutral } from "@dicebear/collection";
 
 const STARTING_ELO: number = 1000;
 
@@ -193,6 +196,13 @@ function PlayerStats() {
   const { data: stats } = useFetchAllStats();
   const { data: games, isFetching: isGamesFetching } = useFetchGames(id);
 
+  const avatar = useMemo(() => {
+    return createAvatar(bottts, {
+      size: 256,
+      seed: user?.username,
+    }).toDataUri();
+  }, [user?.username]);
+
   useEffect(() => {
     setUserStats((user && stats && stats[user.username]) ?? null);
   }, [user, setUserStats, stats]);
@@ -256,11 +266,11 @@ function PlayerStats() {
             <div className="column ml-4">
               <div className="column is-flex">
                 <div className="avatar">
-                  <img
-                    className="avatar-image"
-                    src={defaultAvatar}
-                    alt="Player avatar"
-                  />
+                  {user?.username ? (
+                    <img src={avatar} alt="Avatar" />
+                  ) : (
+                    <LoadingSpinner />
+                  )}
                 </div>
                 <div className="ml-4 player-overview">
                   <PlayerDetail label="Username">{user?.username}</PlayerDetail>
