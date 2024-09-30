@@ -8,3 +8,13 @@
   width: 100%;
   margin-bottom: 2%;
 }
+
+.submit-button {
+  background: var(--accent-yellow) !important;
+  color: var(--dark-text) !important;
+}
+
+.register-button {
+  background: var(--primary-color) !important;
+  color: var(--light-text) !important;
+}

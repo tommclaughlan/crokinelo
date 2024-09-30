@@ -57,11 +57,12 @@ const LatestGames = () => {
     };
 
     return (
-        <article className="message is-danger games-box">
-            <div className="message-header">
+        <div>
+        <article className="m-3 rounded-lg shadow-md">
+            <div className="bg-secondary p-1 pl-4">
                 <p>Latest Games</p>
             </div>
-            <div className="message-body">
+            <div className="p-2 w-full">
                 {!isGamesLoading && gamesData ? (
                     <Carousel items={renderGames()} />
                 ) : (
@@ -69,6 +70,7 @@ const LatestGames = () => {
                 )}
             </div>
         </article>
+        </div>
     );
 };
 
