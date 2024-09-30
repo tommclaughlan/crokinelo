@@ -14,6 +14,16 @@ function Home() {
     const [showSubmit, setShowSubmitScore] = useState(false);
     const [showSubmit1v1, setShowSubmit1v1Score] = useState(false);
 
+    const button = (classes: string, text: string, callback: Function) => {
+        return <button
+            className={classes + " p-2 rounded-md m-2"}
+            type="button"
+            onClick={() => callback(true)}
+        >
+            { text }
+        </button>
+    }
+
     return (
         <>
             <Modal
@@ -35,39 +45,15 @@ function Home() {
                 <Submit1v1Score setShowSubmitScore={setShowSubmit1v1Score} />
             </Modal>
             <Page>
-                <div className="section action-buttons">
-                    <div className="columns">
-                        <div className="column is-one-fifth">
-                            <div>
-                                <div className="is-flex-direction-column">
-                                    <button
-                                        className="button is-warning is-medium action-button"
-                                        type="button"
-                                        onClick={() => setShowSubmit1v1Score(true)}
-                                    >
-                                        Submit 1v1 Result
-                                    </button>
-                                    <button
-                                        className="button is-warning is-medium action-button"
-                                        type="button"
-                                        onClick={() => setShowSubmitScore(true)}
-                                    >
-                                        Submit 2v2 Result
-                                    </button>
-                                    <button
-                                        className="button is-info is-medium action-button"
-                                        type="button"
-                                        onClick={() => setShowRegister(true)}
-                                    >
-                                        Register User
-                                    </button>
-                                </div>
-                            </div>
+                <div className="">
+                    <div className="flex flex-row">
+                        <div className="flex flex-col">
+                            {button("bg-secondary", "Submit 1v1 Result", setShowSubmit1v1Score)}
+                            {button("bg-secondary", "Submit 2v2 Result", setShowSubmitScore)}
+                            {button("bg-tertiary", "Register User", setShowRegister)}
                         </div>
-                        <div className="column is-mobile">
-                            <div>
-                                <LatestGames/>
-                            </div>
+                        <div className="flex-grow">
+                            <LatestGames/>
                         </div>
                     </div>
                 </div>

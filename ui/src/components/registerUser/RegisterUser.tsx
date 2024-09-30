@@ -53,8 +53,9 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
     });
 
     return (
-        <div className="modal-card">
-            <header className="modal-card-head">
+        <div className="flex w-screen h-screen flex-col items-center justify-center z-10">
+            <div className="bg-white p-5 rounded-lg shadow-lg">
+            <header className="">
                 <p className="modal-card-title">Register User</p>
             </header>
             <section className="modal-card-body">
@@ -90,6 +91,7 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
                     {isPostLoading ? <LoadingSpinner size="small" /> : "Submit"}
                 </button>
             </footer>
+            </div>
         </div>
     );
 }
