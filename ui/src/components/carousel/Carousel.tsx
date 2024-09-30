@@ -19,26 +19,23 @@ const Carousel = ({ items }: CarouselProps) => {
         setIndex(newIndex >= length ? 0 : newIndex);
     };
 
+    const button = (text: string, callback: React.MouseEventHandler<HTMLButtonElement>) => {
+        return <button
+            className="rounded-full border border-secondary text-secondary hover:text-white hover:bg-secondary p-2 pl-4 pr-4"
+            onClick={callback}
+        >
+            {text}
+        </button>
+    }
+
     return (
-        <div className="carousel">
-            <div className="columns is-mobile has-text-weight-bold">
-                <div className="column is-one-fifth is-one-fifth-mobile">
-                    <button
-                        className="button is-danger is-outlined is-rounded"
-                        onClick={handlePrevious}
-                    >
-                        ⇦
-                    </button>
-                </div>
-                <div className="column is-three-fifths-mobile">{items?.length && items[index]}</div>
-                <div className="column is-one-fifth is-one-fifth-mobile next-button">
-                    <button
-                        className="button is-danger is-outlined is-rounded"
-                        onClick={handleNext}
-                    >
-                        ⇨
-                    </button>
-                </div>
+        <div className="flex flex-column w-full">
+            <div className="p-2">
+                {button("⇦", handlePrevious)}
+            </div>
+            <div className="flex-grow text-center">{items?.length && items[index]}</div>
+            <div className="p-2">
+                {button("⇨", handleNext)}
             </div>
         </div>
     );
