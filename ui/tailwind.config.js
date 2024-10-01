@@ -18,7 +18,8 @@ module.exports = {
       'white': "#fdeefd",
       'grey': "#999999",
       'black': "#110111",
-      'background': "#fdebfe"
+      'background': "#fdebfe",
+      'border-lilac': "#e4cae6"
     }
   },
   plugins: [],
