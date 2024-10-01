@@ -21,5 +21,7 @@ export const QUOTES = [
     "Crok Me Amadeus",
     "You Crok My World",
     "I Love Crokinole",
-    "Jailhouse Crok"
+    "Jailhouse Crok",
+    "Crokinole Pun",
+    "Crokenheimer",
 ];
