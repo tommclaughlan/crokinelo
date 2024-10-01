@@ -47,9 +47,9 @@ const PlayerDetail = ({
   label: string;
   children?: React.ReactNode;
 }) => (
-  <div className="player-overview-col is-flex is-justify-content-space-between underline-section">
-    <div className="player-overview-label is-size-6">{`${label}: `}</div>
-    <div className="player-overview-value has-text-weight-bold is-size-5">
+  <div className="player-overview-col flex justify-between border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
+    <div className="player-overview-label text-base">{`${label}: `}</div>
+    <div className="player-overview-value font-bold text-xl">
       {children}
     </div>
   </div>
@@ -72,12 +72,12 @@ const GameCard = ({
   const isOneVOne = game.teams[0].length === 1 && game.teams[1].length === 1;
 
   return (
-    <div className="columns underline-section mb-4">
-      <div className="column is-two-thirds">
-        <div className="has-text-weight-semibold game-results is-size-6">
+    <div className="grid mb:grid-rows-4 sm:grid-cols-9 mb-4 gap-3 border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0 justify-center">
+      <div className="sm:col-span-6">
+        <div className="font-semibold text-base grid grid-cols-3 game-results">
           <div className="no-wrap team-one">
             <div
-              className={currentPlayerIndex === 0 ? "has-text-weight-bold" : ""}
+              className={currentPlayerIndex === 0 ? "font-bold" : ""}
             >
               {game.teams[0][0]}
             </div>
@@ -85,15 +85,15 @@ const GameCard = ({
               <div className="is-hidden-mobile">&nbsp;&&nbsp;</div>
             )}
             <div
-              className={currentPlayerIndex === 1 ? "has-text-weight-bold" : ""}
+              className={currentPlayerIndex === 1 ? "font-bold" : ""}
             >
               {game.teams[0][1]}
             </div>
           </div>
-          <div className="no-wrap score has-text-weight-bold">{`${game.score[0]}-${game.score[1]}`}</div>
+          <div className="no-wrap score font-bold">{`${game.score[0]}-${game.score[1]}`}</div>
           <div className="no-wrap team-two">
             <span
-              className={currentPlayerIndex === 2 ? "has-text-weight-bold" : ""}
+              className={currentPlayerIndex === 2 ? "font-bold" : ""}
             >
               {game.teams[1][0]}
             </span>
@@ -108,11 +108,11 @@ const GameCard = ({
           </div>
         </div>
       </div>
-      <div className="column has-text-centered is-size-4 elo">{elo}</div>
-      <div className="column has-text-centered is-size-4 eloDiff">
+      <div className="text-2xl text-center">{elo}</div>
+      <div className="text-2xl text-center">
         <span className={getEloColor(eloDiff)}>{eloDiff}</span>
       </div>
-      <div className="column has-text-centered is-size-6 creation-date">
+      <div className="text-base text-center">
         {`${formatDate(game.creationDate)} - ${formatTime(game.creationDate)}`}
       </div>
     </div>
@@ -258,11 +258,11 @@ function PlayerStats() {
 
   return (
     <Page>
-      <div className="section">
+      <div className="section px-6 py-12">
         <div className="container player-stat-section">
-          <div className="columns">
-            <div className="column ml-4">
-              <div className="column is-flex">
+          <div className="grid mb:grid-rows-2 sm:grid-cols-2 w-full">
+            <div className="ml-4">
+              <div className="flex">
                 <div className="avatar">
                   {user?.username ? (
                     <img src={avatar} alt="Avatar" />
@@ -270,22 +270,22 @@ function PlayerStats() {
                     <LoadingSpinner />
                   )}
                 </div>
-                <div className="ml-4 player-overview">
+                <div className="ml-4 player-overview col-span-2">
                   <PlayerDetail label="Username">{user?.username}</PlayerDetail>
                   <PlayerDetail label="Elo">{user?.elo}</PlayerDetail>
                   <PlayerDetail label="Last Game">{lastGameDate}</PlayerDetail>
                 </div>
               </div>
               <div>
-                <h2 className="has-text-centered has-text-weight-bold">
-                  Elo history
+                <h2 className="has-text-centered font-bold">
+                  ELO History
                 </h2>
                 <EloChart
                   data={processEloForChart(games ?? [], user?.username)}
                 ></EloChart>
               </div>
             </div>
-            <div className="column ml-4">
+            <div className="ml-4">
               <PlayerDetail label="Games Played">
                 {userStats?.gamesCount ?? 0}
               </PlayerDetail>
@@ -306,7 +306,7 @@ function PlayerStats() {
           </div>
         </div>
         <div className="container player-stat-section mt-4">
-          <h3 className="player-stat-section-header is-size-3 has-text-weight-semibold mb-3">
+          <h3 className="player-stat-section-header text-3xl font-semibold mb-3">
             Recent Games
           </h3>
           {isGamesFetching && !games ? (
