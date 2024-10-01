@@ -94,127 +94,129 @@ function Submit1v1Score({ setShowSubmitScore }: SubmitScoreProps) {
     };
 
     return (
-        <div className="modal-card">
-            <header className="modal-card-head">
-                <p className="modal-card-title">
-                    Submit Score (Just put 2-0 if you can't remember)
-                </p>
-            </header>
-            <section className="modal-card-body">
-                <form>
-                    <div className="columns is-mobile">
-                        <div className="column is-two-fifths-mobile column-score">
-                            <div className="field is-grouped">
-                                <div className="team-title">
-                                    <label
-                                        className="label"
-                                        htmlFor="teamOneScore"
-                                    >
-                                        Player One
-                                    </label>
-                                </div>
-                                <input
-                                    className="input"
-                                    id="teamOneScore"
-                                    name="teamOneScore"
-                                    type="number"
-                                    max={10}
-                                    min={0}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.teamOneScore}
-                                />
-                            </div>
-                        </div>
-                        <div className="column column-dash">
-                            <p className="has-text-centered">-</p>
-                        </div>
-                        <div className="column is-two-fifths-mobile column-score">
-                            <div className="field is-grouped">
-                                <input
-                                    className="input  has-text-right"
-                                    id="teamTwoScore"
-                                    name="teamTwoScore"
-                                    type="number"
-                                    max={10}
-                                    min={0}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.teamTwoScore}
-                                />
-                                <div className="team-title">
-                                    <label
-                                        className="label has-text-right"
-                                        htmlFor="teamTwoScore"
-                                    >
-                                        Player Two
-                                    </label>
+        <div className="flex flex-col z-10">
+            <div className="bg-white rounded-lg shadow-2xl">
+                <header className="border-b border-secondary p-4">
+                    <p className="text-2xl">
+                        Submit Score (Just put 2-0 if you can't remember)
+                    </p>
+                </header>
+                <section className="p-4">
+                    <form>
+                        <div className="flex flex-row items-center justify-center p-2">
+                            <div>
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="p-4"
+                                            htmlFor="teamOneScore"
+                                        >
+                                            Player One
+                                        </label>
+                                    </div>
+                                    <input
+                                        className="p-2 rounded-lg border border-secondary"
+                                        id="teamOneScore"
+                                        name="teamOneScore"
+                                        type="number"
+                                        max={10}
+                                        min={0}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.teamOneScore}
+                                    />
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    {formik.errors.score ? (
-                        <div className="has-text-centered has-text-danger">
-                            {formik.errors.score}
-                        </div>
-                    ) : null}
-                    <div className="columns">
-                        <div className="column">
-                            <div className="field">
-                                <Select
-                                    className="player-select"
-                                    placeholder="Player One"
-                                    classNames={{
-                                        menuPortal: (state) => "select-menu",
-                                    }}
-                                    menuPortalTarget={document.body}
-                                    options={formatOptions(users ?? [])}
-                                    onChange={(selected) => {
-                                        formik.setFieldValue(
-                                            "teamOnePlayerOne",
-                                            selected?.value
-                                        );
-                                    }}
-                                />
+                            <div className="pl-6 pr-6">
+                                <p className="text-center">-</p>
+                            </div>
+                            <div>
+                                <div className="flex flex-row">
+                                    <input
+                                        className="p-2 rounded-lg border border-secondary"
+                                        id="teamTwoScore"
+                                        name="teamTwoScore"
+                                        type="number"
+                                        max={10}
+                                        min={0}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.teamTwoScore}
+                                    />
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="p-4"
+                                            htmlFor="teamTwoScore"
+                                        >
+                                            Player Two
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="column has-text-right">
-                            <div className="field">
-                                <Select
-                                    className="player-select"
-                                    placeholder="Player Two"
-                                    classNames={{
-                                        menuPortal: (state) => "select-menu",
-                                    }}
-                                    menuPortalTarget={document.body}
-                                    options={formatOptions(users ?? [])}
-                                    onChange={(selected) => {
-                                        formik.setFieldValue(
-                                            "teamTwoPlayerOne",
-                                            selected?.value
-                                        );
-                                    }}
-                                />
+                        {formik.errors.score ? (
+                            <div className="text-center text-accent-red p-2">
+                                {formik.errors.score}
+                            </div>
+                        ) : null}
+                        <div className="flex flex-row">
+                            <div className="flex flex-col flex-grow">
+                                <div className="p-2">
+                                    <Select
+                                        className="border border-secondary rounded-md"
+                                        placeholder="Player One"
+                                        classNames={{
+                                            menuPortal: (state) => "z-50",
+                                        }}
+                                        menuPortalTarget={document.body}
+                                        options={formatOptions(users ?? [])}
+                                        onChange={(selected) => {
+                                            formik.setFieldValue(
+                                                "teamOnePlayerOne",
+                                                selected?.value
+                                            );
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex flex-col flex-grow">
+                                <div className="p-2">
+                                    <Select
+                                        className="border border-secondary rounded-md"
+                                        placeholder="Player Two"
+                                        classNames={{
+                                            menuPortal: (state) => "z-50",
+                                        }}
+                                        menuPortalTarget={document.body}
+                                        options={formatOptions(users ?? [])}
+                                        onChange={(selected) => {
+                                            formik.setFieldValue(
+                                                "teamTwoPlayerOne",
+                                                selected?.value
+                                            );
+                                        }}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {formik.errors.players ? (
-                        <div className="has-text-centered has-text-danger">
-                            {formik.errors.players}
-                        </div>
-                    ) : null}
-                </form>
-            </section>
-            <footer className="modal-card-foot">
-                <button
-                    className="button is-success"
-                    type="button"
-                    onClick={formik.submitForm}
-                    disabled={isPostLoading}
-                >
-                    {isPostLoading ? <LoadingSpinner size="small" /> : "Submit"}
-                </button>
-            </footer>
+                        {formik.errors.players ? (
+                            <div className="text-center text-accent-red p-2">
+                                {formik.errors.players}
+                            </div>
+                        ) : null}
+                    </form>
+                </section>
+                <footer className="border-t border-secondary text-right">
+                    <button
+                        className="bg-primary text-white rounded-lg p-2 pl-6 pr-6 m-4"
+                        type="button"
+                        onClick={formik.submitForm}
+                        disabled={isPostLoading}
+                    >
+                        {isPostLoading ? <LoadingSpinner size="small"/> : "Submit"}
+                    </button>
+                </footer>
+            </div>
         </div>
-    );
-}
+        );
+    }
 
-export default Submit1v1Score;
+    export default Submit1v1Score;
