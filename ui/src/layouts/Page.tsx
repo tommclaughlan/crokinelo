@@ -18,7 +18,7 @@ function Page({ children }: PageProps) {
                     Puttin' croks in 'oles since 2024
                 </p>
             </div>
-            <div className="flex flex-col w-content">
+            <div className="container page-body flex flex-col">
                 {children}
             </div>
         </div>
