@@ -17,7 +17,8 @@ module.exports = {
       'accent-green': "#69fc96",
       'white': "#fdeefd",
       'black': "#110111",
-      'background': "#fdebfe"
+      'background': "#fdebfe",
+      'border-lilac': "#e4cae6"
     }
   },
   plugins: [],

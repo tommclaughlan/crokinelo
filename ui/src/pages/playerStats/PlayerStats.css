@@ -1,12 +1,7 @@
 .player-stat-section {
     padding: 0.8rem;
     border-radius: 0.8rem;
-    border: 0.1px solid #f5f2f5;
-}
-
-.avatar-image {
-    min-width: 180px;
-    width: 180px;
+    border: 0.1px solid #e4cae6;
 }
 
 .player-overview {
@@ -66,7 +61,7 @@
 
 .score {
     flex: none !important;
-    width: 10%;
+    width: 20%;
     text-align: center;
     margin-left: 16px;
     margin-right: 16px;
@@ -75,10 +70,6 @@
 .game-results {
     display: flex;
     justify-content: center;
-}
-.avatar {
-    width: 256px;
-    height: 256px;
 }
 
 @media only screen and (max-width: 768px) {
