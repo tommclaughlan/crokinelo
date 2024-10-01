@@ -53,44 +53,44 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
     });
 
     return (
-        <div className="flex w-screen h-screen flex-col items-center justify-center z-10">
-            <div className="bg-white p-5 rounded-lg shadow-lg">
-            <header className="">
-                <p className="modal-card-title">Register User</p>
-            </header>
-            <section className="modal-card-body">
-                <form>
-                    <div className="field">
-                        <label className="label">Username</label>
-                        <div className="control">
-                            <input
-                                className="input"
-                                name="username"
-                                id="username"
-                                type="text"
-                                value={formik.values.username}
-                                onChange={formik.handleChange}
-                                maxLength={20}
-                            />
+        <div className="flex flex-col z-10">
+            <div className="bg-white rounded-lg shadow-2xl">
+                <header className="border-b border-secondary p-4">
+                    <p className="text-2xl">Register User</p>
+                </header>
+                <section className="p-4">
+                    <form>
+                        <div>
+                            <label className="text-lg font-bold p-2 pl-4">Username</label>
+                            <div className="p-4">
+                                <input
+                                    className="border border-secondary rounded-lg p-2"
+                                    name="username"
+                                    id="username"
+                                    type="text"
+                                    value={formik.values.username}
+                                    onChange={formik.handleChange}
+                                    maxLength={20}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    {formik.errors.username ? (
-                        <div className="has-text-centered has-text-danger">
-                            {formik.errors.username}
-                        </div>
-                    ) : null}
-                </form>
-            </section>
-            <footer className="modal-card-foot">
-                <button
-                    className="button is-success"
-                    type="submit"
-                    onClick={formik.submitForm}
-                    disabled={isPostLoading || isUsersLoading}
-                >
-                    {isPostLoading ? <LoadingSpinner size="small" /> : "Submit"}
-                </button>
-            </footer>
+                        {formik.errors.username ? (
+                            <div className="text-accent-red text-center">
+                                {formik.errors.username}
+                            </div>
+                        ) : null}
+                    </form>
+                </section>
+                <footer className="border-t border-secondary text-right">
+                    <button
+                        className="bg-primary text-white rounded-lg p-2 pl-6 pr-6 m-4"
+                        type="submit"
+                        onClick={formik.submitForm}
+                        disabled={isPostLoading || isUsersLoading}
+                    >
+                        {isPostLoading ? <LoadingSpinner size="small" /> : "Submit"}
+                    </button>
+                </footer>
             </div>
         </div>
     );
