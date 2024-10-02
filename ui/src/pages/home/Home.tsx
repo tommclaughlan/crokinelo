@@ -45,7 +45,7 @@ function Home() {
                 <Submit1v1Score setShowSubmitScore={setShowSubmit1v1Score} />
             </Modal>
             <Page>
-                <div className="">
+                <div className="py-12">
                     <div className="flex flex-row">
                         <div className="flex flex-col">
                             {button("bg-secondary", "Submit 1v1 Result", setShowSubmit1v1Score)}

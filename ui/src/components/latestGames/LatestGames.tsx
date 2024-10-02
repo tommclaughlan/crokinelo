@@ -43,7 +43,7 @@ const LatestGames = () => {
                                 {renderPlayers(elem.teams[1])}
                             </div>
                         </div>
-                        <p className="has-text-centered">
+                        <p className="text-center">
                             {`Played at: ${datePlayed.toLocaleTimeString(
                                 "en-UK"
                             )} ${datePlayed.toLocaleDateString("en-UK")}`}
@@ -59,7 +59,7 @@ const LatestGames = () => {
     return (
         <div>
         <article className="m-3 rounded-lg shadow-md">
-            <div className="bg-secondary p-1 pl-4">
+            <div className="bg-secondary p-1 pl-4 rounded-tl-lg rounded-tr-lg">
                 <p>Latest Games</p>
             </div>
             <div className="p-2 w-full">
