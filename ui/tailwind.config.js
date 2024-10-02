@@ -15,7 +15,7 @@ module.exports = {
       'accent-red': "#fb3640",
       'accent-yellow': "#fde74c",
       'accent-green': "#69fc96",
-      'white': "#fdeefd",
+      'white': "#fff",
       'grey': "#999999",
       'black': "#110111",
       'background': "#fdebfe",

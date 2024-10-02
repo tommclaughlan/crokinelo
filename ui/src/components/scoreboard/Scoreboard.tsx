@@ -55,16 +55,16 @@ const Scoreboard = () => {
 
                 return (
                     <tr
-                        className="tr is-clickable"
+                        className={(index % 2 == 0 ? "bg-white " : "") + "tr border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0"}
                         key={elem._id}
                         data-item={elem}
                         onClick={() => handleRowClicked(elem)}
                     >
                         <td className="td">{icon}</td>
-                        <td className="td has-text-centered">{displayRank}</td>
+                        <td className="td text-center">{displayRank}</td>
                         <td className="td">{elem.username}</td>
-                        <td className="td has-text-right">{elem.elo}</td>
-                        <td className="td has-text-centered">
+                        <td className="td text-right">{elem.elo}</td>
+                        <td className="td text-center">
                             {isStatsLoading ? "-" : winPercentage}
                         </td>
                         <td className="td">
@@ -83,15 +83,15 @@ const Scoreboard = () => {
 
     return (
         <>
-            <table className="table is-striped is-hoverable is-fullwidth">
-                <thead className="thead">
+            <table className="table-auto">
+                <thead className="thead border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
                     <tr className="tr">
                         <th className="th"></th>
-                        <th className="th has-text-centered">Rank</th>
-                        <th className="th">Username</th>
-                        <th className="th has-text-right">ELO</th>
-                        <th className="th has-text-centered">Win %</th>
-                        <th className="th">Form</th>
+                        <th className="th text-center">Rank</th>
+                        <th className="th text-left">Username</th>
+                        <th className="th text-right">ELO</th>
+                        <th className="th text-center">Win %</th>
+                        <th className="th text-left">Form</th>
                     </tr>
                 </thead>
                 {!isUsersLoading && (
