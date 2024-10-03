@@ -16,10 +16,10 @@ jobs:
           npm run build
       - name: Package for S3
         run: |
-          mkdir ui/build/turbofelo
-          mv ui/build/*.* ui/build/turbofelo/
-          mv ui/build/static ui/build/turbofelo/
-          mv ui/build/turbofelo/index.html ui/build
+          mkdir ui/build/crokinelo
+          mv ui/build/*.* ui/build/crokinelo/
+          mv ui/build/static ui/build/crokinelo/
+          mv ui/build/crokinelo/index.html ui/build
       - name: Setup AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -27,7 +27,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
       - name: Upload to S3
-        run: aws s3 sync ui/build s3://turbofelo --delete
+        run: aws s3 sync ui/build s3://crokinelo --delete
   build_backend:
     name: Build and deploy backend Lambda functions
     runs-on: ubuntu-latest

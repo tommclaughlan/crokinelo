@@ -2,7 +2,7 @@
     "name": "ui",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://mbeanland1.github.io/turbofelo",
+    "homepage": "https://tommclaughlan.github.io/crokinelo",
     "dependencies": {
         "@dicebear/collection": "^9.2.2",
         "@dicebear/core": "^9.2.2",
