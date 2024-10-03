@@ -9,3 +9,11 @@
         background: var(--secondary-light-color);
     }
 }
+
+.carousel {
+    color: var(--dark-text);
+  }
+
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+  }

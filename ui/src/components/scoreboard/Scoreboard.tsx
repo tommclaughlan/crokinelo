@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFetchAllStats, useFetchUsers } from "../../services/apiService";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
@@ -55,7 +54,7 @@ const Scoreboard = () => {
 
                 return (
                     <tr
-                        className={(index % 2 == 0 ? "bg-white " : "") + "tr border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0"}
+                        className={(index % 2 === 0 ? "bg-white " : "") + "tr border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0"}
                         key={elem._id}
                         data-item={elem}
                         onClick={() => handleRowClicked(elem)}

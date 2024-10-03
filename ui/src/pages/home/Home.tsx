@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Scoreboard from "../../components/scoreboard/Scoreboard";
 import Modal from "../../components/modal/Modal";
 import RegisterUser from "../../components/registerUser/RegisterUser";
 import SubmitScore from "../../components/submitScore/SubmitScore";
 import Submit1v1Score from "../../components/submit1v1Score/Submit1v1Score";
-import LatestGames from "../../components/latestGames/LatestGames";
+import LatestGamesTicker from "../../components/latestGames/LatestGamesTicker";
 import Page from "../../layouts/Page";
 
 import "./Home.css";
@@ -44,21 +44,21 @@ function Home() {
             >
                 <Submit1v1Score setShowSubmitScore={setShowSubmit1v1Score} />
             </Modal>
-            <Page>
-                <div className="py-12">
-                    <div className="flex flex-row">
-                        <div className="flex flex-col">
-                            {button("bg-secondary", "Submit 1v1 Result", setShowSubmit1v1Score)}
-                            {button("bg-secondary", "Submit 2v2 Result", setShowSubmitScore)}
-                            {button("bg-tertiary", "Register User", setShowRegister)}
-                        </div>
-                        <div className="flex-grow">
-                            <LatestGames/>
+            <div className="pb-10">
+                <Page>
+                    <div className="py-12">
+                        <div className="flex flex-row">
+                            <div className="flex flex-col">
+                                {button("bg-secondary", "Submit 1v1 Result", setShowSubmit1v1Score)}
+                                {button("bg-secondary", "Submit 2v2 Result", setShowSubmitScore)}
+                                {button("bg-tertiary", "Register User", setShowRegister)}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <Scoreboard/>
-            </Page>
+                    <Scoreboard/>
+                </Page>
+            </div>
+            <LatestGamesTicker/>
         </>
     );
 }

@@ -1,10 +1,9 @@
 import React from "react";
-import "./latestGames.css";
-import Carousel from "../carousel/Carousel";
+import "./latestGamesTicker.css";
 import { useFetchGames } from "../../services/apiService";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
-const LatestGames = () => {
+const LatestGamesTicker = () => {
     const { isLoading: isGamesLoading, data: gamesData } = useFetchGames();
 
     const renderPlayers = (players: ReadonlyArray<string>) => {
@@ -25,25 +24,25 @@ const LatestGames = () => {
         }
 
         const games: ReadonlyArray<React.ReactNode> = gamesData.map(
-            (elem, index, array) => {
+            (elem) => {
                 const datePlayed = new Date(
                     parseInt(elem._id.substring(0, 8), 16) * 1000
                 );
 
                 return (
                     <div>
-                        <div className="columns is-mobile">
-                            <div className="column">
+                        <div className="flex flex-row justify-center gap-2">
+                            <div>
                                 {renderPlayers(elem.teams[0])}
                             </div>
-                            <div className="column">
+                            <div>
                                 {`${elem.score[0]} - ${elem.score[1]}`}
                             </div>
-                            <div className="column">
+                            <div>
                                 {renderPlayers(elem.teams[1])}
                             </div>
                         </div>
-                        <p className="text-center">
+                        <p className="text-center text-xs text-grey">
                             {`Played at: ${datePlayed.toLocaleTimeString(
                                 "en-UK"
                             )} ${datePlayed.toLocaleDateString("en-UK")}`}
@@ -56,15 +55,21 @@ const LatestGames = () => {
         return games;
     };
 
+    const carouselItems = renderGames();
+
     return (
         <div>
-        <article className="m-3 rounded-lg shadow-md">
-            <div className="bg-secondary p-1 pl-4 rounded-tl-lg rounded-tr-lg">
+        <article className="mt-3 shadow-md fixed bottom-0 h-36px w-full flex">
+            <div className="bg-secondary pt-1 sm:pt-2 w-1/6 sm:text-sm text-xs text-center z-10">
                 <p>Latest Games</p>
             </div>
-            <div className="p-2 w-full">
+            <div className="w-5/6">
                 {!isGamesLoading && gamesData ? (
-                    <Carousel items={renderGames()} />
+                <div className="flex flex-row w-full marquee-container bg-white relative overflow-x-hidden border border-border-lilac border-b-0 border-t-1 border-x-0">
+                {/* Two of the same data are used to make the marquee appear infinitely repeating */}
+                    <div className="flex flex-row animate-marquee marquee-content whitespace-nowrap text-sm text-center px-7 gap-14">{carouselItems?.length && carouselItems}</div>
+                    <div className="flex flex-row animate-marquee2 marquee-content whitespace-nowrap text-sm text-center px-7 gap-14">{carouselItems?.length && carouselItems}</div>
+                </div>
                 ) : (
                     <LoadingSpinner />
                 )}
@@ -74,4 +79,4 @@ const LatestGames = () => {
     );
 };
 
-export default LatestGames;
+export default LatestGamesTicker;
