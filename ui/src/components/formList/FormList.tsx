@@ -19,8 +19,8 @@ export default function FormList({ results }: FormListProps) {
             const parentClass = isWin ? "bg-accent-green" : "bg-accent-red";
 
             formList.push(
-                <span className={`form-result border-secondary border sm:border-none ${parentClass}`} key={gameIndex}>
-                    <span className="invisible sm:visible">{character}</span>
+                <span className={`form-result border-secondary border md:border-none ${parentClass}`} key={gameIndex}>
+                    <span className="invisible md:visible">{character}</span>
                 </span>
             );
             gameIndex++;
