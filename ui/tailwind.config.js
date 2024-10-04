@@ -14,7 +14,7 @@ module.exports = {
       'tertiary': "#a85fb4",
       'accent-red': "#fb3640",
       'accent-yellow': "#fde74c",
-      'accent-green': "#69fc96",
+      'accent-green': "#33dc67",
       'white': "#fff",
       'grey': "#999999",
       'black': "#110111",
