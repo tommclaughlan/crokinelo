@@ -99,7 +99,7 @@ function SubmitScore({ setShowSubmitScore }: SubmitScoreProps) {
 
     return (
         <div className="flex flex-col z-10">
-            <div className="bg-white rounded-lg shadow-2xl">
+            <div className="bg-white rounded-lg shadow-2xl m-4">
                 <header className="border-b border-secondary p-4">
                     <p className="text-2xl">
                         Submit Score (Just put 2-0 if you can't remember)
