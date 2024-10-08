@@ -8,8 +8,6 @@ import {
   useFetchGames,
   useFetchUsers,
 } from "../../services/apiService";
-
-import "./PlayerStats.css";
 import {
   IGamesResponse,
   IGame,
