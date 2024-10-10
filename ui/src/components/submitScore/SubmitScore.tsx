@@ -70,16 +70,26 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
       teamOnePlayerTwo: "",
       teamTwoPlayerOne: "",
       teamTwoPlayerTwo: "",
-      score: "",
+      scoreMax: "",
+      scoreOf2Req: "",
+      draw: "",
       players: "",
     },
     validate: (values) => {
       const errors: {
-        score?: string;
+        scoreMax?: string;
+        scoreOf2Req?: string;
+        draw?: string;
         players?: string;
       } = {};
       if (values.teamOneScore !== 2 && values.teamTwoScore !== 2) {
-        errors.score = "One score must be 2!";
+        errors.scoreOf2Req = "One score must be 2!";
+      }
+      if (values.teamOneScore > 2 || values.teamTwoScore > 2) {
+        errors.scoreMax = "Score cannot be higher than 2!";
+      }
+      if (values.teamOneScore === values.teamTwoScore) {
+        errors.draw = "One must triumph over the other!!";
       }
       const players = is1v1
         ? new Set([values.teamOnePlayerOne, values.teamTwoPlayerOne])
@@ -169,9 +179,19 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                 </div>
               </div>
             </div>
-            {formik.errors.score ? (
+            {formik.errors.scoreMax ? (
               <div className="text-center text-accent-red p-2">
-                {formik.errors.score}
+                {formik.errors.scoreMax}
+              </div>
+            ) : null}
+            {formik.errors.scoreOf2Req ? (
+              <div className="text-center text-accent-red p-2">
+                {formik.errors.scoreOf2Req}
+              </div>
+            ) : null}
+            {formik.errors.draw ? (
+              <div className="text-center text-accent-red p-2">
+                {formik.errors.draw}
               </div>
             ) : null}
             <div className="flex flex-row">
