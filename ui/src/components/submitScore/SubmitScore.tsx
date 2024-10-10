@@ -75,11 +75,16 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
     },
     validate: (values) => {
       const errors: {
-        score?: string;
+        score?: string[];
         players?: string;
       } = {};
+      // pretty sure this is a misuse of formik's validation errors but it makes it easier to add new validations for existing fields
+      let scoreErrors: string[] = [];
       if (values.teamOneScore !== 2 && values.teamTwoScore !== 2) {
-        errors.score = "One score must be 2!";
+        scoreErrors.push("One score must be 2!");
+      }
+      if (values.teamOneScore > 2 || values.teamTwoScore > 2) {
+        scoreErrors.push("Score cannot be higher than 2!");
       }
       const players = is1v1
         ? new Set([values.teamOnePlayerOne, values.teamTwoPlayerOne])
@@ -93,6 +98,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
       if ((!is1v1 && players.size !== 4) || (is1v1 && players.size !== 2)) {
         errors.players = "All players must be filled in";
       }
+      errors.score = scoreErrors;
       return errors;
     },
     onSubmit: (values) => {
@@ -171,7 +177,9 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
             </div>
             {formik.errors.score ? (
               <div className="text-center text-accent-red p-2">
-                {formik.errors.score}
+                {(formik.errors.score as unknown as string[]).map((error) => (
+                  <p> {error}</p>
+                ))}
               </div>
             ) : null}
             <div className="flex flex-row">
