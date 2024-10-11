@@ -62,9 +62,9 @@ const Scoreboard = () => {
                     >
                         <td className="td">{icon}</td>
                         <td className="td text-center">{displayRank}</td>
-                        <td className="td">{elem.username}</td>
-                        <td className="td text-right">{elem.elo}</td>
-                        <td className="td text-center">
+                        <td className="td text-center sm:text-left truncate max-w-20">{elem.username}</td>
+                        <td className="td text-center">{elem.elo}</td>
+                        <td className="text-center hidden sm:block">
                             {isStatsLoading ? "-" : winPercentage}
                         </td>
                         <td className="td">
@@ -83,19 +83,19 @@ const Scoreboard = () => {
 
     return (
         <>
-            <table className="table-auto">
+            <table className="table-fixed">
                 <thead className="thead border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
                     <tr className="tr">
                         <th className="th"></th>
                         <th className="th text-center">Rank</th>
-                        <th className="th text-left">Username</th>
-                        <th className="th text-right">ELO</th>
-                        <th className="th text-center">Win %</th>
+                        <th className="th text-center sm:text-left max-w-20">Username</th>
+                        <th className="th text-center px-4 sm:px-0">ELO</th>
+                        <th className="text-center hidden sm:block">Win %</th>
                         <th className="th text-left">Form</th>
                     </tr>
                 </thead>
                 {!isUsersLoading && (
-                    <tbody className="tbody">{renderScoreboard()}</tbody>
+                    <tbody className="tbody cursor-pointer">{renderScoreboard()}</tbody>
                 )}
             </table>
             {isUsersLoading && <LoadingSpinner />}

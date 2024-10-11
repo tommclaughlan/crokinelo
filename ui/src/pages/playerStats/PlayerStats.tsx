@@ -73,7 +73,7 @@ const GameCard = ({
     <div className="grid mb:grid-rows-4 sm:grid-cols-9 mb-4 gap-3 border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0 justify-center">
       <div className="sm:col-span-6">
         <div className="font-semibold text-base grid grid-cols-3 game-results">
-          <div className="no-wrap team-one">
+          <div className="flex flex-row no-wrap team-one justify-center">
             <div
               className={currentPlayerIndex === 0 ? "font-bold" : ""}
             >
@@ -88,8 +88,8 @@ const GameCard = ({
               {game.teams[0][1]}
             </div>
           </div>
-          <div className="no-wrap score font-bold">{`${game.score[0]}-${game.score[1]}`}</div>
-          <div className="no-wrap team-two">
+          <div className="no-wrap score font-bold text-center">{`${game.score[0]}-${game.score[1]}`}</div>
+          <div className="flex flex-row no-wrap team-two justify-center">
             <span
               className={currentPlayerIndex === 2 ? "font-bold" : ""}
             >

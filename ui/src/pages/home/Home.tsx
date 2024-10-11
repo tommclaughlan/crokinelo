@@ -47,7 +47,7 @@ function Home() {
             <Page>
                 <div className="py-2 md:py-12">
                     <div className="flex flex-col md:flex-row">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col pt-1">
                             {button("bg-secondary", "Submit 1v1 Result", setShowSubmit1v1Score)}
                             {button("bg-secondary", "Submit 2v2 Result", setShowSubmitScore)}
                             {button("bg-tertiary", "Register User", setShowRegister)}
