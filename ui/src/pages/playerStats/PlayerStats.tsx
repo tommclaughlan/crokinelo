@@ -8,8 +8,6 @@ import {
   useFetchGames,
   useFetchUsers,
 } from "../../services/apiService";
-
-import "./PlayerStats.css";
 import {
   IGamesResponse,
   IGame,
@@ -32,12 +30,12 @@ const formatTime = (date: string) =>
 
 const getEloColor = (eloDiff: string) => {
   if (eloDiff === "+0") {
-    return "black";
+    return "text-black";
   }
   if (eloDiff[0] === "+") {
-    return "green";
+    return "text-accent-green";
   }
-  return "red";
+  return "text-accent-red";
 };
 
 const PlayerDetail = ({
@@ -82,7 +80,7 @@ const GameCard = ({
               {game.teams[0][0]}
             </div>
             {isOneVOne ? null : (
-              <div className="is-hidden-mobile">&nbsp;&&nbsp;</div>
+              <div className="invisible sm:visible">&nbsp;&&nbsp;</div>
             )}
             <div
               className={currentPlayerIndex === 1 ? "font-bold" : ""}
@@ -169,7 +167,7 @@ const renderRecentGames = (games: IGamesResponse, currentPlayer?: string) => {
   return currentPlayer === undefined || games.length === 0 ? (
     <div>No recent games to show</div>
   ) : (
-    <div className="container">
+    <div>
       {processedGames.map((game) => (
         <GameCard
           game={game}
@@ -258,19 +256,19 @@ function PlayerStats() {
 
   return (
     <Page>
-      <div className="section px-6 py-12">
-        <div className="container player-stat-section">
-          <div className="grid mb:grid-rows-2 sm:grid-cols-2 w-full">
-            <div className="ml-4">
+      <div className="section px-0 py-0 sm:px-6 sm:py-12">
+        <div className="w-full p-3 sm:border border-b border-secondary sm:rounded-xl">
+          <div className="grid sm:grid-cols-2 w-full py-4">
+            <div className="sm:ml-4">
               <div className="flex">
-                <div className="avatar">
+                <div className="avatar w-50 sm:w-auto flex-wrap">
                   {user?.username ? (
                     <img src={avatar} alt="Avatar" />
                   ) : (
                     <LoadingSpinner />
                   )}
                 </div>
-                <div className="ml-4 player-overview col-span-2">
+                <div className="md:ml-4 w-full">
                   <PlayerDetail label="Username">{user?.username}</PlayerDetail>
                   <PlayerDetail label="Elo">{user?.elo}</PlayerDetail>
                   <PlayerDetail label="Last Game">{lastGameDate}</PlayerDetail>
@@ -305,7 +303,7 @@ function PlayerStats() {
             </div>
           </div>
         </div>
-        <div className="container player-stat-section mt-4">
+        <div className="w-full p-3 mt-4 sm:border border-secondary rounded-xl">
           <h3 className="player-stat-section-header text-3xl font-semibold mb-3">
             Recent Games
           </h3>

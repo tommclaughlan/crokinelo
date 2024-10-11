@@ -32,7 +32,7 @@ export const QUOTES = [
     "Crok dealer",
     "This crok is really moreish",
     "Crok Addict",
-    "Smokin' crok",
+    "Smokin' Crok",
     "Don't say crok, Jez, please, not now. Cause when you say crok it makes me think of crok, and I love crok.",
     "Croktails",
     "Get your hands off my crok",
@@ -50,5 +50,5 @@ export const QUOTES = [
     "Is that a crok in your pocket, or are you just pleased to see me?",
     "Croxanne",
     "Big crok energy",
-    "Go hard or go Crokinole"
+    "Go hard or go Crokinole",
 ];
