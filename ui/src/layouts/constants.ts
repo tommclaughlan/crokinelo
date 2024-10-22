@@ -25,11 +25,11 @@ export const QUOTES = [
     "Crokinole Pun",
     "Crokenheimer",
     "CROK YOU 😡",
-    "Crokin' Hell",
+    "Crokin' hell",
     "It's crok o' clock",
     "Crok of shit",
     "Betty Crokker",
-    "Crok Dealer",
+    "Crok dealer",
     "This crok is really moreish",
     "Crok Addict",
     "Smokin' Crok",
@@ -47,5 +47,8 @@ export const QUOTES = [
     "Croks out for Harambe",
     "A Crokwork Orange",
     "The Crokinoles of Narnia",
-    "Is that a crok in your pocket, or are you just pleased to see me?"
+    "Is that a crok in your pocket, or are you just pleased to see me?",
+    "Croxanne",
+    "Big crok energy",
+    "Go hard or go Crokinole",
 ];
