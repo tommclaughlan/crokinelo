@@ -5,7 +5,21 @@ module.exports = {
     extend: {
       spacing: {
         'content': '64rem'
-      }
+      },
+      animation: {
+        marquee: 'marquee 35s linear infinite',
+        marquee2: 'marquee 35s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0%)' },
+        },
+      },
     },
     colors: {
       transparent: "transparent",
@@ -20,6 +34,11 @@ module.exports = {
       'black': "#110111",
       'background': "#fdebfe",
       'border-lilac': "#e4cae6"
+    }
+  },
+  variants: {
+    extend: {
+      animation: ['hover', 'focus'],
     }
   },
   plugins: [],

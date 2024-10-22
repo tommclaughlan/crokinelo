@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFetchAllStats, useFetchUsers } from "../../services/apiService";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
