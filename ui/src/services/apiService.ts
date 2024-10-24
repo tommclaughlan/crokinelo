@@ -3,8 +3,8 @@ import {
     AllStatsResponse,
     IGameRequest,
     IGamesResponse,
-    IUserRequest,
     IUpdateResponse,
+    IUserRequest,
     IUsersResponse,
 } from "./apiTypes";
 
@@ -66,9 +66,9 @@ export const useFetchAllStats = () =>
 export const useRegisterUser = (
     options:
         | Omit<
-              UseMutationOptions<IUsersResponse, string, IUserRequest>,
-              "mutationFn"
-          >
+            UseMutationOptions<IUsersResponse, string, IUserRequest>,
+            "mutationFn"
+        >
         | undefined
 ) =>
     useMutation<IUsersResponse, string, IUserRequest>(
@@ -86,6 +86,7 @@ export const useRegisterUser = (
                     body: JSON.stringify({
                         username: user.username,
                         elo: 1000,
+                        userOffice: user.userOffice
                     }),
                 }
             ).then((res) => res.json()),
@@ -95,13 +96,13 @@ export const useRegisterUser = (
 export const useSubmitResult = (
     options:
         | Omit<
-              UseMutationOptions<
-                  IUpdateResponse,
-                  string,
-                  ReadonlyArray<IGameRequest>
-              >,
-              "mutationFn"
-          >
+            UseMutationOptions<
+                IUpdateResponse,
+                string,
+                ReadonlyArray<IGameRequest>
+            >,
+            "mutationFn"
+        >
         | undefined
 ) =>
     useMutation<IUpdateResponse, string, ReadonlyArray<IGameRequest>>(
