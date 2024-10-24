@@ -1,11 +1,13 @@
 export interface IUserRequest {
     username: string;
+    userOffice: string;
 }
 
 export interface IUser {
     _id: string;
     username: string;
     elo: number;
+    userOffice: string;
 }
 
 export type IUsersResponse = ReadonlyArray<IUser>;

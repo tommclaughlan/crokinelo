@@ -270,6 +270,13 @@ function PlayerStats() {
                 </div>
                 <div className="md:ml-4 w-full">
                   <PlayerDetail label="Username">{user?.username}</PlayerDetail>
+                  <PlayerDetail label="Office">
+                    {isGamesFetching
+                      ? null
+                      : user?.userOffice
+                      ? user.userOffice
+                      : "Newcastle"}
+                  </PlayerDetail>
                   <PlayerDetail label="Elo">{user?.elo}</PlayerDetail>
                   <PlayerDetail label="Last Game">{lastGameDate}</PlayerDetail>
                 </div>

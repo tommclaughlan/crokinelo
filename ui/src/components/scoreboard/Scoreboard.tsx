@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFetchAllStats, useFetchUsers } from "../../services/apiService";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import "./Scoreboard.css";
 import { IUser } from "../../services/apiTypes";
 import FormList from "../formList/FormList";
+import Select from "react-select";
 
 const getIcon = (index: number) => {
     switch (index) {
@@ -25,6 +27,31 @@ const Scoreboard = () => {
     const { isLoading: isStatsLoading, data: statData } = useFetchAllStats();
     const navigate = useNavigate();
 
+    const [selectedOffice, setSelectedOffice] = useState<string>("All Offices");
+
+    const offices = ["All Offices", "Bristol", "Newcastle"];
+
+    const formatOptions = (options: string[]) => {
+      if (options) {
+        const formattedOptions = options.map((elem) => {
+          return {
+            label: elem,
+            value: elem,
+          };
+        });
+        return formattedOptions;
+      }
+    };
+  
+    const filteredUsers = (): IUser[] => {
+      if (!userData) return []; 
+
+      return userData.filter(user =>{
+        const userOffice = user.userOffice ?? "Newcastle";
+        return selectedOffice === userOffice || selectedOffice === "All Offices"}
+      );
+    };
+
     const handleRowClicked = (rowData: IUser) => {
         navigate(`/player/${rowData._id}`);
     };
@@ -33,8 +60,7 @@ const Scoreboard = () => {
         if (userData) {
             let previousElo = -1;
             let currentRank = 0;
-
-            const users = userData.map((elem, index, array) => {
+            const users = filteredUsers().map((elem, index, array) => {
                 const isEqualToPreviousElo = elem.elo === previousElo;
 
                 if (!isEqualToPreviousElo) {
@@ -82,6 +108,19 @@ const Scoreboard = () => {
 
     return (
         <>
+                  <Select
+                  className="border border-secondary rounded-md w-auto self-end"
+                  placeholder="Select an office"
+                  defaultValue={{ value: "All Offices", label: "All Offices" }}
+                  options={formatOptions(offices)}
+                  classNames={{
+                    menuPortal: (state) => "z-50",
+                  }}
+                  menuPortalTarget={document.body}
+                  onChange={(selected) => {
+                    setSelectedOffice(selected?.value ? selected.value : "All Offices");
+                  }}
+                />
             <table className="table-auto">
                 <thead className="thead border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
                     <tr className="tr">
