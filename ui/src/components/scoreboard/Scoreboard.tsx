@@ -45,13 +45,11 @@ const Scoreboard = () => {
   
     const filteredUsers = (): IUser[] => {
       if (!userData) return []; 
-      if (selectedOffice === "All Offices") {
-        return [...userData]
-      }
-      if (selectedOffice === "Newcastle") {
-        return userData?.filter(item => item.userOffice === selectedOffice || item.userOffice === undefined);
-      }
-      return userData?.filter(item => item.userOffice === selectedOffice);
+
+      return userData.filter(user =>{
+        const userOffice = user.userOffice ?? "Newcastle";
+        return selectedOffice === userOffice || selectedOffice === "All Offices"}
+      );
     };
 
     const handleRowClicked = (rowData: IUser) => {
