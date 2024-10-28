@@ -101,9 +101,6 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
                   className="border border-secondary rounded-md"
                   placeholder="Office"
                   options={formatOptions(offices)}
-                  classNames={{
-                    menuPortal: (state) => "z-50",
-                  }}
                   menuPortalTarget={document.body}
                   onChange={(selected) => {
                     formik.setFieldValue("userOffice", selected?.value);

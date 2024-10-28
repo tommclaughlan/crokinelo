@@ -7,7 +7,6 @@ import {
   useSubmitResult,
 } from "../../services/apiService";
 
-import "./submitScore.css";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import { I1v1GameForm, IGameForm, IUser } from "../../services/apiTypes";
 
@@ -200,9 +199,6 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                   <Select
                     className="border border-secondary rounded-md"
                     placeholder="Player One"
-                    classNames={{
-                      menuPortal: (state) => "z-50",
-                    }}
                     menuPortalTarget={document.body}
                     options={formatOptions(users ?? [])}
                     onChange={(selected) => {
@@ -215,9 +211,6 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                     <Select
                       className="border border-secondary rounded-md"
                       placeholder="Player Two"
-                      classNames={{
-                        menuPortal: (state) => "z-50",
-                      }}
                       menuPortalTarget={document.body}
                       options={formatOptions(users ?? [])}
                       onChange={(selected) => {
@@ -235,9 +228,6 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                   <Select
                     className="border border-secondary rounded-md"
                     placeholder={is1v1 ? "Player Two" : "Player One"}
-                    classNames={{
-                      menuPortal: (state) => "z-50",
-                    }}
                     menuPortalTarget={document.body}
                     options={formatOptions(users ?? [])}
                     onChange={(selected) => {
@@ -250,9 +240,6 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                     <Select
                       className="border border-secondary rounded-md"
                       placeholder="Player Two"
-                      classNames={{
-                        menuPortal: (state) => "z-50",
-                      }}
                       menuPortalTarget={document.body}
                       options={formatOptions(users ?? [])}
                       onChange={(selected) => {
