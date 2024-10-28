@@ -5,7 +5,6 @@ import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import "./Scoreboard.css";
 import { IUser } from "../../services/apiTypes";
 import FormList from "../formList/FormList";
-import Select from "react-select";
 
 const getIcon = (index: number) => {
     switch (index) {
@@ -34,10 +33,9 @@ const Scoreboard = () => {
     const formatOptions = (options: string[]) => {
       if (options) {
         const formattedOptions = options.map((elem) => {
-          return {
-            label: elem,
-            value: elem,
-          };
+          return <>
+            <option label={elem} value={elem}>{elem}</option>
+            </>
         });
         return formattedOptions;
       }
@@ -87,7 +85,7 @@ const Scoreboard = () => {
                     >
                         <td className="td">{icon}</td>
                         <td className="td text-center">{displayRank}</td>
-                        <td className="td">{elem.username}</td>
+                        <td className="td truncate">{elem.username}</td>
                         <td className="td text-right">{elem.elo}</td>
                         <td className="td text-center">
                             {isStatsLoading ? "-" : winPercentage}
@@ -108,25 +106,18 @@ const Scoreboard = () => {
 
     return (
         <>
-                  <Select
-                  className="border border-secondary rounded-md w-auto self-end"
-                  placeholder="Select an office"
-                  defaultValue={{ value: "All Offices", label: "All Offices" }}
-                  options={formatOptions(offices)}
-                  classNames={{
-                    menuPortal: (state) => "z-50",
-                  }}
-                  menuPortalTarget={document.body}
-                  onChange={(selected) => {
-                    setSelectedOffice(selected?.value ? selected.value : "All Offices");
-                  }}
-                />
+            <select className="border border-2 border-secondary p-1 px-3 rounded-md self-end mr-1 mb-2" placeholder="Select an office" onChange={(selected) => {
+                setSelectedOffice(selected?.target.value ? selected.target.value : "All Offices");
+                }}>
+                {formatOptions(offices)}
+            </select>
+                
             <table className="table-auto">
                 <thead className="thead border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
                     <tr className="tr">
                         <th className="th"></th>
                         <th className="th text-center">Rank</th>
-                        <th className="th text-left">Username</th>
+                        <th className="th text-left max-w-1/4">Username</th>
                         <th className="th text-right">ELO</th>
                         <th className="th text-center">Win %</th>
                         <th className="th text-left">Form</th>

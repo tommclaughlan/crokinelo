@@ -46,8 +46,8 @@ const PlayerDetail = ({
   children?: React.ReactNode;
 }) => (
   <div className="player-overview-col flex justify-between border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
-    <div className="player-overview-label text-base">{`${label}: `}</div>
-    <div className="player-overview-value font-bold text-xl">
+    <div className="player-overview-label text-base pr-1">{`${label}: `}</div>
+    <div className="player-overview-value font-bold text-xl truncate max-w-full">
       {children}
     </div>
   </div>
@@ -75,7 +75,7 @@ const GameCard = ({
         <div className="font-semibold text-base grid grid-cols-3 game-results">
           <div className="no-wrap team-one">
             <div
-              className={currentPlayerIndex === 0 ? "font-bold" : ""}
+              className={"truncate" + (currentPlayerIndex === 0 ? "font-bold" : "")}
             >
               {game.teams[0][0]}
             </div>
@@ -83,26 +83,26 @@ const GameCard = ({
               <div className="invisible sm:visible">&nbsp;&&nbsp;</div>
             )}
             <div
-              className={currentPlayerIndex === 1 ? "font-bold" : ""}
+              className={"truncate" + (currentPlayerIndex === 1 ? "font-bold" : "")}
             >
               {game.teams[0][1]}
             </div>
           </div>
           <div className="no-wrap score font-bold">{`${game.score[0]}-${game.score[1]}`}</div>
           <div className="no-wrap team-two">
-            <span
-              className={currentPlayerIndex === 2 ? "font-bold" : ""}
+            <div
+              className={"truncate" + (currentPlayerIndex === 2 ? "font-bold" : "")}
             >
               {game.teams[1][0]}
-            </span>
+            </div>
             {isOneVOne ? null : (
               <div className="is-hidden-mobile">&nbsp;&&nbsp;</div>
             )}
-            <span
-              className={currentPlayerIndex === 3 ? "has-text-weight-bold" : ""}
+            <div
+              className={"truncate" + (currentPlayerIndex === 3 ? "font-bold" : "")}
             >
               {game.teams[1][1]}
-            </span>
+            </div>
           </div>
         </div>
       </div>
