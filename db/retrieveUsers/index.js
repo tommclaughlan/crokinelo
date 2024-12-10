@@ -54,7 +54,7 @@ exports.handler = async (event, context) => {
     const db = await connectToDatabase(isTest);
     const users = await db
         .collection("users")
-        .find({})
+        .find({ inactive: { $ne: true } })
         .sort({ elo: -1 })
         .toArray();
 
