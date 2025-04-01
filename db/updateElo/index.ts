@@ -7,7 +7,7 @@ const USER_COLLECTION = "users2";
 const GAME_COLLECTION = "games2";
 
 const elo = new EloRank();
-const K_FACTOR = 50;
+const K_FACTOR = 5;
 
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";

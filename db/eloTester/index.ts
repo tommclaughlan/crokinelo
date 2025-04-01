@@ -4,7 +4,7 @@ import {Db, MongoClient} from "mongodb";
 const elo = new EloRank();
 
 const STARTING_ELO = 1000;
-const K_FACTOR = 50;
+const K_FACTOR = 5;
 
 const MONGODB_URI = "%MONGO_SECRET%";
 

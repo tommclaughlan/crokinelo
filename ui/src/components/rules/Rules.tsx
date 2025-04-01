@@ -28,13 +28,13 @@ function Rules({ setShowRules }: RulesProps) {
               <p>If at any point during a valid shot a disc ends in the central hole, that disc is removed immediately and the team who controls that
               disc is awarded 20 points.</p>
               <p className="font-bold">House Rules</p>
-              <p>To determine which team starts the game, each player will attempt to shoot a disc into the central hole. Whichever player is closest goes first.</p>
+              <p>To determine which team starts the game, each player will attempt to shoot a disc into the central hole. Whichever player is closest decides who goes first.</p>
               <p className="font-bold">Scoring</p>
               <p>The sections on the board decrease in value from the centre, starting with the central hole which is worth 20 points.
               The sections then decrease to 15, 10 and 5 points, and any pieces outside or partially outside of the playing are are worth 0.</p>
               <p>If a disc lies on the boundary between 2 scoring zones then it is deemed to be the lower score.</p>
-              <p>A game comprises of 3 sets. The first team to win 2 sets wins the game. A set is defined as a single round where each team
-              shoots 12 discs.</p>
+              <p>A game is defined as 1 round of 12 counters per team. At the end of a game, record the total scores per team and submit this to the tracker.
+              Ties are permitted, and will be factored into the Elo calculation.</p>
           </section>
       </div>
     </div>
