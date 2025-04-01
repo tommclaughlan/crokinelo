@@ -8,6 +8,9 @@ const K_FACTOR = 50;
 
 const MONGODB_URI = "%MONGO_SECRET%";
 
+const GAMES_COLLECTION = "games2";
+const USERS_COLLECTION = "users2";
+
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
 
@@ -51,7 +54,7 @@ export async function closeConnection() {
 
 export async function main() {
     const db = await connectToDatabase(true);
-    let users = await db.collection("users")
+    let users = await db.collection(USERS_COLLECTION)
         .find({})
         .toArray();
 
@@ -59,7 +62,7 @@ export async function main() {
         user.elo = STARTING_ELO
     });
 
-    let games = await db.collection("games")
+    let games = await db.collection(GAMES_COLLECTION)
         .find({})
         .sort({ creationDate: 1 })
         .toArray();

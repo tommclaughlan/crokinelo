@@ -7,8 +7,8 @@ import "./Maintenance.css";
 function Maintenance() {
     return (
         <Page>
-            <div className="container is-flex is-flex-direction-column is-justify-content-center has-text-centered">
-                <div className="is-flex is-flex-direct-row is-justify-content-center">
+            <div className="flex flex-col align-middle justify-center text-center">
+                <div className="flex text-center justify-center">
                     <img
                         className="maintenance-icon"
                         src={maintenanceIcon}
@@ -19,7 +19,7 @@ function Maintenance() {
                     We've got something special in store for you.
                 </p>
                 <p className="is-size-5">
-                    Turbo's Table Football Elo Extravaganza is currently down
+                    The CLAM Crokinole Elo Extravaganza is currently down
                     for maintenance.
                 </p>
                 <p className="is-size-5">Please check back soon.</p>

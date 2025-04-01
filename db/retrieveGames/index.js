@@ -5,6 +5,8 @@ const ObjectId = require("mongodb").ObjectId;
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";
 
+const GAMES_COLLECTION = "games2";
+
 let cachedClient = null;
 let cachedDb = null;
 
@@ -97,7 +99,7 @@ exports.handler = async (event, context) => {
 
     const db = await connectToDatabase(isTest);
     const games = await db
-        .collection("games")
+        .collection(GAMES_COLLECTION)
         .find(searchCriteria)
         .sort({ creationDate: -1 })
         .limit(user ? 20 : 6)

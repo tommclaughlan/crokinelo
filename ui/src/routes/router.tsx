@@ -2,11 +2,12 @@ import { createHashRouter } from "react-router-dom";
 import Home from "../pages/home/Home";
 import PlayerStats from "../pages/playerStats/PlayerStats";
 import NotFoundPage from "../pages/notFoundPage/NotFoundPage";
+import Maintenance from "../pages/maintenance/Maintenance";
 
 const routes = [
     {
         path: "/",
-        element: <Home />,
+        element: <Maintenance />,
     },
     {
         path: "player/:id",

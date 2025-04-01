@@ -4,6 +4,8 @@ const MongoClient = require("mongodb").MongoClient;
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";
 
+const USERS_COLLECTION = "users2";
+
 let cachedClient = null;
 let cachedDb = null;
 
@@ -53,7 +55,7 @@ exports.handler = async (event, context) => {
 
     const db = await connectToDatabase(isTest);
     const users = await db
-        .collection("users")
+        .collection(USERS_COLLECTION)
         .find({ inactive: { $ne: true } })
         .sort({ elo: -1 })
         .toArray();
