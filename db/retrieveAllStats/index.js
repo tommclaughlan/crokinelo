@@ -75,6 +75,9 @@ exports.handler = async (event, context) => {
                     myScore: {
                         $arrayElemAt: ["$score", "$teamIndex"],
                     },
+                    myVerdict: {
+                        $arrayElemAt: ["$verdict", "$teamIndex"]
+                    }
                 },
             },
             {
@@ -87,7 +90,29 @@ exports.handler = async (event, context) => {
                         $sum: {
                             $cond: [
                                 {
-                                    $eq: ["$myScore", 2],
+                                    $eq: ["$myVerdict", 1],
+                                },
+                                1,
+                                0,
+                            ],
+                        },
+                    },
+                    ties: {
+                        $sum: {
+                            $cond: [
+                                {
+                                    $eq: ["$myVerdict", 0.5],
+                                },
+                                1,
+                                0,
+                            ],
+                        },
+                    },
+                    losses: {
+                        $sum: {
+                            $cond: [
+                                {
+                                    $eq: ["$myVerdict", 0],
                                 },
                                 1,
                                 0,

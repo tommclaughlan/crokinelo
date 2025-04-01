@@ -12,11 +12,12 @@ export default function FormList({ results }: FormListProps) {
     if (results) {
         let gameIndex = 0;
         while (gameIndex < 6 && gameIndex < results.length) {
-            const isWin = results[gameIndex].myScore === 2;
+            const isWin = results[gameIndex].myVerdict === 1;
+            const isTie = results[gameIndex].myVerdict === 0.5;
 
-            const character = isWin ? "W" : "L";
+            const character = isTie ? "T" : isWin ? "W" : "L";
 
-            const parentClass = isWin ? "bg-accent-green" : "bg-accent-red";
+            const parentClass = isTie ? "bg-accent-yellow" : isWin ? "bg-accent-green" : "bg-accent-red";
 
             formList.push(
                 <span className={`form-result border-secondary border md:border-none ${parentClass}`} key={gameIndex}>

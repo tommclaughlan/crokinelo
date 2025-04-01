@@ -5,6 +5,7 @@ const ObjectId = require("mongodb").ObjectId;
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";
 
+const USERS_COLLECTION = "users2";
 const GAMES_COLLECTION = "games2";
 
 let cachedClient = null;
@@ -51,7 +52,7 @@ async function closeConnection() {
 async function getUser(id, isTest) {
     const db = await connectToDatabase(isTest);
 
-    return db.collection("users").findOne({ _id: new ObjectId(id) });
+    return db.collection(USERS_COLLECTION).findOne({ _id: new ObjectId(id) });
 }
 
 exports.handler = async (event, context) => {

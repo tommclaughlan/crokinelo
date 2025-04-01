@@ -51,7 +51,7 @@ const Scoreboard = () => {
     };
 
     const handleRowClicked = (rowData: IUser) => {
-        navigate(`/player/${rowData._id}`);
+        // navigate(`/player/${rowData._id}`);
     };
 
     const renderScoreboard = () => {
