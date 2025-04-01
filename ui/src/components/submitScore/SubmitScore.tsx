@@ -120,7 +120,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
       <div className="bg-white rounded-lg shadow-2xl m-4">
         <header className="border-b border-secondary p-4">
           <p className="text-2xl">
-            Submit Score (Just put 2-0 if you can't remember)
+            Submit Score
           </p>
         </header>
         <section className="p-4">
