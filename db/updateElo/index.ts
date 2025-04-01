@@ -3,11 +3,11 @@ import { Handler } from "aws-lambda";
 import { IDbGame, IDbUser, IResult, IUpdateBody } from "./types";
 import { MongoClient, Db } from "mongodb";
 
-const USER_COLLECTION = "users";
-const GAME_COLLECTION = "games";
+const USER_COLLECTION = "users2";
+const GAME_COLLECTION = "games2";
 
 const elo = new EloRank();
-const K_FACTOR = 50;
+const K_FACTOR = 5;
 
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";
@@ -153,7 +153,19 @@ export const handleSubmitedGames = (
     games.forEach((game) => {
         const usernames = game.teams.flatMap((team) => team.players);
 
-        const results: ReadonlyArray<IResult> = game.teams.map((team) => ({
+        const team1 = game.teams[0].score;
+        const team2 = game.teams[1].score;
+
+        // a draw is represented by 0.5, win 1, loss 0
+        let verdict = [0.5, 0.5];
+
+        if (team1 > team2) {
+            verdict = [1, 0];
+        } else if (team1 < team2) {
+            verdict = [0, 1];
+        }
+
+        const results: ReadonlyArray<IResult> = game.teams.map((team, i) => ({
             players: team.players.map((username) => {
                 let elo = newElos?.[username];
 
@@ -176,7 +188,7 @@ export const handleSubmitedGames = (
                     elo,
                 };
             }),
-            verdict: Number(team.score) === 2 ? 1 : 0,
+            verdict: verdict[i],
             score: team.score,
         }));
 
