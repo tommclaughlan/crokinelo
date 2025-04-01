@@ -9,6 +9,7 @@ export interface IDbGame {
     teams: ReadonlyArray<ReadonlyArray<string>>;
     score: ReadonlyArray<number>;
     newElos: Record<string, number>;
+    verdict: ReadonlyArray<number>;
     creationDate: Date;
 }
 

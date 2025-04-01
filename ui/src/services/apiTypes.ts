@@ -66,4 +66,5 @@ export interface IStatResult {
     creationDate: string;
     username: string;
     myScore: number;
+    myVerdict: number;
 }

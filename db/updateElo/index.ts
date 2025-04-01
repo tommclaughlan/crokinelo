@@ -210,6 +210,7 @@ export const handleSubmitedGames = (
             teams: teams,
             score: [game.teams[0].score, game.teams[1].score],
             newElos,
+            verdict: verdict,
             creationDate: new Date(),
         });
     });
