@@ -301,9 +301,9 @@ function PlayerStats() {
                 <FormList results={userStats?.results || []} />
               </PlayerDetail>
               <div>
-                <PlayerDetail label="Sets Won">{setsFor}</PlayerDetail>
-                <PlayerDetail label="Sets Lost">{setsAgainst}</PlayerDetail>
-                <PlayerDetail label="Set Difference">
+                <PlayerDetail label="Points Won">{setsFor}</PlayerDetail>
+                <PlayerDetail label="Points Conceded">{setsAgainst}</PlayerDetail>
+                <PlayerDetail label="Point Difference">
                   {setsFor - setsAgainst}
                 </PlayerDetail>
               </div>
