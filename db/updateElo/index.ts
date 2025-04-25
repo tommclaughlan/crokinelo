@@ -113,7 +113,7 @@ async function retrievePlayerDictionaryFromDB(
 }
 
 export const calculateElos = (results: ReadonlyArray<IResult>) => {
-    const kFactor = Math.abs(results[0].score - results[1].score);
+    const kFactor = Math.abs(results[0].score - results[1].score) + 5;
 
     elo.setKFactor(kFactor * K_FACTOR);
 
