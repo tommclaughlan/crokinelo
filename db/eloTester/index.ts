@@ -53,7 +53,7 @@ export async function closeConnection() {
 }
 
 export async function main() {
-    const db = await connectToDatabase(false);
+    const db = await connectToDatabase(true);
     let users = await db.collection(USERS_COLLECTION)
         .find({})
         .toArray();
