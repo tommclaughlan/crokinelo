@@ -5,6 +5,7 @@ const elo = new EloRank();
 
 const STARTING_ELO = 1000;
 const K_FACTOR = 5;
+const K_MOD_CONST = 0.004;
 
 const MONGODB_URI = "%MONGO_SECRET%";
 
@@ -68,15 +69,23 @@ export async function main() {
         .toArray();
 
     games.forEach(game => {
-        const kFactor = Math.abs(game.score[0] - game.score[1]);
+        const scoreDiff = (Math.abs(game.score[0] - game.score[1]));
+        const kFactor = K_FACTOR * (scoreDiff + 5);
+        const modKFactor = kFactor * Math.exp(-1 * scoreDiff * K_MOD_CONST);
 
-        elo.setKFactor(kFactor * K_FACTOR);
+        elo.setKFactor(modKFactor);
 
         const teamElos = game.teams.map((team: string[]) => {
             return team.reduce((sum, user) => sum + users.find(u => u.username === user).elo, 0) / team.length
         });
 
-        const verdict = game.score[0] > game.score[1] ? [1, 0] : [0, 1];
+        let verdict = [0.5, 0.5];
+
+        if (game.score[0] > game.score[1]) {
+            verdict = [1, 0];
+        } else if (game.score[0] < game.score[1]) {
+            verdict = [0, 1];
+        }
 
         const expectedScores = [
             elo.getExpected(teamElos[0], teamElos[1]),
@@ -99,11 +108,11 @@ export async function main() {
             users.find(u => u.username === user).elo = newElos[user];
         }
 
-        db.collection("games").updateOne({ _id: game._id }, { $set: { newElos: newElos }});
+        db.collection("games2").updateOne({ _id: game._id }, { $set: { newElos: newElos }});
     });
 
     users.forEach(user => {
-        db.collection("users").updateOne({ _id: user._id }, { $set: { elo: user.elo }});
+        db.collection("users2").updateOne({ _id: user._id }, { $set: { elo: user.elo }});
     });
 }
 
