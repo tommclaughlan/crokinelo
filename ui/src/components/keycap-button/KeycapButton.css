@@ -1,0 +1,46 @@
+.keycap-container {
+    height: 60px;
+    margin: 8px 15px;
+    background: transparent;
+}
+
+.keycap-button {
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    color: var(--white-color);
+    box-shadow: 0 2px 6px 2px var(--tertiary-dark-color);
+    padding: 10px;
+
+    & span {
+        --indent-height: 95%;
+        color: var(--white-color);
+        font-family: "Tiny5", sans-serif;
+        font-weight: 600;
+        font-size: 18pt;
+        text-align: center;
+        border-radius: 22px;
+        width: 100%;
+        height: var(--indent-height);
+        /*line-height: var(--indent-height);*/
+        text-shadow: var(--primary-dark-color) 0 2px 2px;
+        display: block;
+        padding: 0 10px;
+    }
+}
+
+.primary {
+    background: linear-gradient(var(--secondary-color), var(--primary-color));
+
+    & span {
+        background: linear-gradient(var(--primary-color), var(--secondary-color));
+    }
+}
+
+.secondary {
+    background: linear-gradient(var(--secondary-color), var(--tertiary-color));
+
+    & span {
+        background: linear-gradient(var(--tertiary-color), var(--secondary-color));
+    }
+}

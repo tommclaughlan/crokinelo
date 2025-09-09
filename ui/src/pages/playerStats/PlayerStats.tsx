@@ -47,7 +47,7 @@ const PlayerDetail = ({
 }) => (
   <div className="player-overview-col flex justify-between border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
     <div className="player-overview-label text-base pr-1">{`${label}: `}</div>
-    <div className="player-overview-value font-bold text-xl truncate max-w-full">
+    <div className="player-overview-value text-xl truncate max-w-full">
       {children}
     </div>
   </div>
@@ -72,7 +72,7 @@ const GameCard = ({
   return (
     <div className="grid mb:grid-rows-4 sm:grid-cols-9 mb-4 gap-3 border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0 justify-center">
       <div className="sm:col-span-6">
-        <div className="font-semibold text-base grid grid-cols-3 game-results">
+        <div className="text-lg grid grid-cols-3 game-results">
           <div className="no-wrap team-one">
             <div
               className={"truncate" + (currentPlayerIndex === 0 ? "font-bold" : "")}
@@ -88,7 +88,7 @@ const GameCard = ({
               {game.teams[0][1]}
             </div>
           </div>
-          <div className="no-wrap score font-bold">{`${game.score[0]}-${game.score[1]}`}</div>
+          <div className="no-wrap score text-2xl">{`${game.score[0]}-${game.score[1]}`}</div>
           <div className="no-wrap team-two">
             <div
               className={"truncate" + (currentPlayerIndex === 2 ? "font-bold" : "")}
@@ -106,8 +106,8 @@ const GameCard = ({
           </div>
         </div>
       </div>
-      <div className="text-2xl text-center">{elo}</div>
-      <div className="text-2xl text-center">
+      <div className="text-3xl text-center">{elo}</div>
+      <div className="text-xl text-center">
         <span className={getEloColor(eloDiff)}>{eloDiff}</span>
       </div>
       <div className="text-base text-center">
@@ -261,7 +261,7 @@ function PlayerStats() {
           <div className="grid sm:grid-cols-2 w-full py-4">
             <div className="sm:ml-4">
               <div className="flex">
-                <div className="avatar w-50 sm:w-auto flex-wrap">
+                <div className="avatar w-20 sm:w-auto flex-wrap p-2">
                   {user?.username ? (
                     <img src={avatar} alt="Avatar" />
                   ) : (

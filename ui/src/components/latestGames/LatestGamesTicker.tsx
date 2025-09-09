@@ -59,11 +59,11 @@ const LatestGamesTicker = () => {
 
     return (
         <div>
-        <article className="mt-3 shadow-md fixed bottom-0 h-36px w-full flex">
-            <div className="bg-secondary pt-1 sm:pt-2 w-1/6 sm:text-sm text-xs text-center z-10">
+        <article className="latest-games-container mt-3 shadow-md fixed bottom-0 h-36px w-full flex">
+            <div className="latest-games bg-secondary pt-1 sm:pt-2 w-1/6 sm:text-sm text-xs text-center z-10">
                 <p>Latest Games</p>
             </div>
-            <div className="w-5/6">
+            <div className="latest-games-ticker w-5/6">
                 {!isGamesLoading && gamesData ? (
                 <div className="flex flex-row w-full marquee-container bg-white relative overflow-x-hidden border border-border-lilac border-b-0 border-t-1 border-x-0">
                 {/* Two of the same data are used to make the marquee appear infinitely repeating */}

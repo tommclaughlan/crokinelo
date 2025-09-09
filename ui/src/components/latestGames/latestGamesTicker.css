@@ -1,3 +1,17 @@
 .marquee-container:hover .marquee-content {
     animation-play-state: paused;
-  }
+ }
+
+.latest-games {
+    background: linear-gradient(var(--secondary-light-color), var(--secondary-color), var(--secondary-dark-color));
+    border-top: 2px solid var(--secondary-dark-color);
+    border-right: 2px solid var(--secondary-dark-color);
+}
+
+.latest-games-ticker {
+    border-top: 2px solid var(--secondary-color);
+}
+
+.latest-games-container {
+    box-shadow: 0 -8px 16px 2px var(--secondary-light-color);
+}

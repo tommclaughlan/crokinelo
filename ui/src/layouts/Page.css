@@ -15,8 +15,12 @@
 }
 
 .header {
-    background: var(--primary-color);
-    .title, .subtitle {
-        color: var(--light-text);
-    }
+    width: 100%;
+    padding: 10px 20px;
+    box-shadow: 0 2px 8px var(--secondary-dark-color);
+}
+
+.home-icon {
+    height: 32px;
+    width: 32px;
 }

@@ -7,6 +7,7 @@ import LatestGamesTicker from "../../components/latestGames/LatestGamesTicker";
 import Page from "../../layouts/Page";
 
 import "./Home.css";
+import KeycapButton from "../../components/keycap-button/KeycapButton";
 
 function Home() {
   const [showRegister, setShowRegister] = useState(false);
@@ -42,13 +43,9 @@ function Home() {
         <div className="pb-10">
           <Page>
             <div className=" py-5 flex flex-col sm:flex-row">
-              {button(
-                "bg-secondary",
-                "Submit 1v1 Result",
-                setShowSubmit1v1Score
-              )}
-              {button("bg-secondary", "Submit 2v2 Result", setShowSubmitScore)}
-              {button("bg-tertiary", "Register User", setShowRegister)}
+                <KeycapButton onClick={() => setShowSubmit1v1Score(true)} text={"Submit 1v1"} />
+                <KeycapButton onClick={() => setShowSubmitScore(true)} text={"Submit 2v2"} />
+                <KeycapButton onClick={() => setShowRegister(true)} text={"Register"} type={"secondary"} />
             </div>
             <Scoreboard />
           </Page>

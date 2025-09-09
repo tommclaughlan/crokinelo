@@ -5,31 +5,30 @@
     vertical-align: middle;
     text-align: center;
     line-height: 22px !important;
-    margin-right: 2px;
+    margin-right: 4px;
     color: #fff;
     font-weight: 400;
+    border-radius: 5px;
+    border: 2px solid var(--tertiary-color);
 }
 
-.form-result-win {
-    background-color: #44c424;
+.win {
+    background: linear-gradient(var(--accent-green-light), var(--accent-green), var(--accent-green-dark));
 }
 
-.form-result-loss {
-    background-color: #d00;
+.tie {
+    background: linear-gradient(var(--accent-yellow-light), var(--accent-yellow), var(--accent-yellow-dark));
+}
+
+.loss {
+    background: linear-gradient(var(--accent-red-light), var(--accent-red), var(--accent-red-dark));
 }
 
 @media only screen and (max-width: 768px) {
     .form-result {
-        display: inline-block;
         height: 18px;
         width: 18px;
-        vertical-align: middle;
-        text-align: center;
-        line-height: 19px !important;
+        border: 1px solid var(--tertiary-color);
         margin-right: 2px;
-        color: #fff;
-        font-weight: 500;
-        font-size:0.8em;
-        border-radius: 5px;
     }
-    }
+}

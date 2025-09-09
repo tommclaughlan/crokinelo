@@ -7,8 +7,11 @@ import {
   useSubmitResult,
 } from "../../services/apiService";
 
+import './SubmitScore.css';
+
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import { I1v1GameForm, IGameForm, IUser } from "../../services/apiTypes";
+import KeycapButton from "../keycap-button/KeycapButton";
 
 const gameFormToGameRequest = (game: IGameForm) => ({
   teams: [
@@ -116,10 +119,10 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
   };
 
   return (
-    <div className="flex flex-col z-10">
-      <div className="bg-white rounded-lg shadow-2xl m-4">
+    <div className="pixel-font flex flex-col z-10">
+      <div className="submit-score bg-white rounded-lg m-4">
         <header className="border-b border-secondary p-4">
-          <p className="text-2xl">
+          <p className="pixel-font text-2xl">
             Submit Score
           </p>
         </header>
@@ -138,7 +141,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                     id="teamOneScore"
                     name="teamOneScore"
                     type="number"
-                    max={10}
+                    max={240}
                     min={0}
                     onChange={formik.handleChange}
                     value={formik.values.teamOneScore}
@@ -155,7 +158,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                     id="teamTwoScore"
                     name="teamTwoScore"
                     type="number"
-                    max={10}
+                    max={240}
                     min={0}
                     onChange={formik.handleChange}
                     value={formik.values.teamTwoScore}
@@ -240,15 +243,8 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
             ) : null}
           </form>
         </section>
-        <footer className="border-t border-secondary text-right">
-          <button
-            className="bg-primary text-white rounded-lg p-2 pl-6 pr-6 m-4"
-            type="button"
-            onClick={formik.submitForm}
-            disabled={isPostLoading}
-          >
-            {isPostLoading ? <LoadingSpinner size="small" /> : "Submit"}
-          </button>
+        <footer className="border-t border-secondary text-right p-2">
+            <KeycapButton onClick={formik.submitForm} text={"Submit"} disabled={isPostLoading} />
         </footer>
       </div>
     </div>

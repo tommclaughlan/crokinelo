@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { QUOTES } from "./constants";
+import { ReactComponent as HomeSvg } from '../icons/home-solid.svg';
 
 import "./Page.css";
 import {HomeIcon} from "@heroicons/react/24/solid";
@@ -21,8 +22,8 @@ function Page({ children }: PageProps) {
             <Modal show={showRules} handleClose={() => setShowRules(false)}>
                 <Rules setShowRules={setShowRules} />
             </Modal>
-            <div className="bg-primary text-white w-full px-6 py-4 sm:py-2 flex flex-row justify-between items-center">
-                <HomeIcon onClick={() => navigate("/")} className="cursor-pointer size-6 text-white-50"></HomeIcon>
+            <div className="bg-primary text-white sm:py-2 flex flex-row justify-between items-center header">
+                <HomeSvg onClick={() => navigate("/")} className="home-icon cursor-pointer"></HomeSvg>
                 <div className="text-center flex-grow-1 max-w-[75%]">
                     <p className="text-3xl font-semibold truncate" title={randomQuote}>{randomQuote}</p>
                     <p className="text-xl opacity-65 hidden sm:block">

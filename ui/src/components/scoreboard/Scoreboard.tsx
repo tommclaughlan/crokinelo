@@ -83,7 +83,7 @@ const Scoreboard = () => {
                         data-item={elem}
                         onClick={() => handleRowClicked(elem)}
                     >
-                        <td className="td">{icon}</td>
+                        <td className="td medal">{icon}</td>
                         <td className="td text-center">{displayRank}</td>
                         <td className="td truncate">{elem.username}</td>
                         <td className="td text-right">{elem.elo}</td>
@@ -106,11 +106,11 @@ const Scoreboard = () => {
 
     return (
         <>
-            <select className="border border-2 border-secondary p-1 px-3 rounded-md self-end mr-1 mb-2" placeholder="Select an office" onChange={(selected) => {
-                setSelectedOffice(selected?.target.value ? selected.target.value : "All Offices");
-                }}>
-                {formatOptions(offices)}
-            </select>
+            {/*<select className="border border-2 border-secondary p-1 px-3 rounded-md self-end mr-1 mb-2" placeholder="Select an office" onChange={(selected) => {*/}
+            {/*    setSelectedOffice(selected?.target.value ? selected.target.value : "All Offices");*/}
+            {/*    }}>*/}
+            {/*    {formatOptions(offices)}*/}
+            {/*</select>*/}
                 
             <table className="table-auto">
                 <thead className="thead border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">

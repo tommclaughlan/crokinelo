@@ -1,3 +1,7 @@
 th:first-child {
     width: 0px;
 }
+
+.medal {
+    font-family: "SerenityOS Emoji", sans-serif;
+}

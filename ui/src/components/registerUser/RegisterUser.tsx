@@ -5,6 +5,9 @@ import { useFetchUsers, useRegisterUser } from "../../services/apiService";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import Select from "react-select";
 
+import './RegisterUser.css';
+import KeycapButton from "../keycap-button/KeycapButton";
+
 interface RegisterUserProps {
   setShowRegister: (isShown: boolean) => void;
 }
@@ -62,13 +65,13 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
         errors.username = "Username must not be empty";
       }
 
-      if (!offices.includes(values.userOffice)) {
-        errors.userOffice = "Why are you doing this";
-      }
+      // if (!offices.includes(values.userOffice)) {
+      //   errors.userOffice = "Why are you doing this";
+      // }
 
-      if (values.userOffice === "") {
-        errors.userOffice = "Please choose your home office";
-      }
+      // if (values.userOffice === "") {
+      //   errors.userOffice = "Please choose your home office";
+      // }
 
       return errors;
     },
@@ -79,7 +82,7 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
 
   return (
     <div className="flex flex-col z-10">
-      <div className="bg-white rounded-lg shadow-2xl">
+      <div className="register bg-white rounded-lg">
         <header className="border-b border-secondary p-4">
           <p className="text-2xl">Register User</p>
         </header>
@@ -97,15 +100,15 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
                   onChange={formik.handleChange}
                   maxLength={20}
                 />
-                <Select
-                  className="border border-secondary rounded-md"
-                  placeholder="Office"
-                  options={formatOptions(offices)}
-                  menuPortalTarget={document.body}
-                  onChange={(selected) => {
-                    formik.setFieldValue("userOffice", selected?.value);
-                  }}
-                />
+                {/*<Select*/}
+                {/*  className="border border-secondary rounded-md"*/}
+                {/*  placeholder="Office"*/}
+                {/*  options={formatOptions(offices)}*/}
+                {/*  menuPortalTarget={document.body}*/}
+                {/*  onChange={(selected) => {*/}
+                {/*    formik.setFieldValue("userOffice", selected?.value);*/}
+                {/*  }}*/}
+                {/*/>*/}
               </div>
             </div>
             {formik.errors.username ? (
@@ -120,15 +123,8 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
             ) : null}
           </form>
         </section>
-        <footer className="border-t border-secondary text-right">
-          <button
-            className="bg-primary text-white rounded-lg p-2 pl-6 pr-6 m-4"
-            type="submit"
-            onClick={formik.submitForm}
-            disabled={isPostLoading || isUsersLoading}
-          >
-            {isPostLoading ? <LoadingSpinner size="small" /> : "Submit"}
-          </button>
+        <footer className="border-t border-secondary text-right p-2">
+            <KeycapButton onClick={formik.submitForm} text={"Register"} type={"secondary"} disabled={isPostLoading} />
         </footer>
       </div>
     </div>

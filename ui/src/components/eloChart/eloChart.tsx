@@ -19,8 +19,8 @@ const EloChart = ({data}: ChartProps) => {
                 label: "Elo",
                 data: data.slice(-20).map(d => d.elo),
                 fill: true,
-                backgroundColor: "rgba(75, 192, 192, 0.2)",
-                borderColor: "rgba(75, 192, 192, 1)",
+                backgroundColor: "rgb(125,111,200,0.2)",
+                borderColor: "rgb(125,111,200)",
             }
         ]
     };
