@@ -13,7 +13,7 @@ interface RegisterUserProps {
 function RegisterUser({ setShowRegister }: RegisterUserProps) {
   const queryClient = useQueryClient();
 
-  const { data: users, isLoading: isUsersLoading } = useFetchUsers();
+  const { data: users } = useFetchUsers();
 
   const { mutate: registerUser, isLoading: isPostLoading } = useRegisterUser({
     onSuccess: (data) => {
