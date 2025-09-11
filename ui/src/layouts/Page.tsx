@@ -3,7 +3,6 @@ import { QUOTES } from "./constants";
 import { ReactComponent as HomeSvg } from '../icons/home-solid.svg';
 
 import "./Page.css";
-import {HomeIcon} from "@heroicons/react/24/solid";
 import {useNavigate} from "react-router-dom";
 import Modal from "../components/modal/Modal";
 import Rules from "../components/rules/Rules";

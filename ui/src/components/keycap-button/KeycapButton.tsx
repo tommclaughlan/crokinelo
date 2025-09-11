@@ -20,7 +20,7 @@ const KeycapButton = ({ onClick, text, disabled, type }: KeycapButtonProps) => {
 
     return (
         <button
-            className={"keycap-container flex-auto"}
+            className={"keycap-container"}
             type="button"
             onClick={onClick}
             disabled={disabled}

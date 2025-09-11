@@ -14,18 +14,6 @@ function Home() {
   const [showSubmit, setShowSubmitScore] = useState(false);
   const [showSubmit1v1, setShowSubmit1v1Score] = useState(false);
 
-  const button = (classes: string, text: string, callback: Function) => {
-    return (
-      <button
-        className={classes + " p-2 rounded-md m-2"}
-        type="button"
-        onClick={() => callback(true)}
-      >
-        {text}
-      </button>
-    );
-  };
-
   return (
     <>
       <Modal show={showRegister} handleClose={() => setShowRegister(false)}>
