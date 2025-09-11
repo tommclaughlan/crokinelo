@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFetchAllStats, useFetchUsers } from "../../services/apiService";
+import {useNavigate} from "react-router-dom";
+import {useFetchAllStats, useFetchUsers} from "../../services/apiService";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import "./Scoreboard.css";
-import { IUser } from "../../services/apiTypes";
+import {IUser} from "../../services/apiTypes";
 import FormList from "../formList/FormList";
 
 const getIcon = (index: number) => {
@@ -26,30 +25,6 @@ const Scoreboard = () => {
     const { isLoading: isStatsLoading, data: statData } = useFetchAllStats();
     const navigate = useNavigate();
 
-    const [selectedOffice, setSelectedOffice] = useState<string>("All Offices");
-
-    const offices = ["All Offices", "Bristol", "Newcastle"];
-
-    const formatOptions = (options: string[]) => {
-      if (options) {
-        const formattedOptions = options.map((elem) => {
-          return <>
-            <option label={elem} value={elem}>{elem}</option>
-            </>
-        });
-        return formattedOptions;
-      }
-    };
-  
-    const filteredUsers = (): IUser[] => {
-      if (!userData) return []; 
-
-      return userData.filter(user =>{
-        const userOffice = user.userOffice ?? "Newcastle";
-        return selectedOffice === userOffice || selectedOffice === "All Offices"}
-      );
-    };
-
     const handleRowClicked = (rowData: IUser) => {
         navigate(`/player/${rowData._id}`);
     };
@@ -58,7 +33,7 @@ const Scoreboard = () => {
         if (userData) {
             let previousElo = -1;
             let currentRank = 0;
-            const users = filteredUsers().map((elem, index, array) => {
+            return userData.map((elem, index, array) => {
                 const isEqualToPreviousElo = elem.elo === previousElo;
 
                 if (!isEqualToPreviousElo) {
@@ -94,24 +69,17 @@ const Scoreboard = () => {
                             {isStatsLoading || !myStats ? (
                                 "-"
                             ) : (
-                                <FormList results={myStats.results} />
+                                <FormList results={myStats.results}/>
                             )}
                         </td>
                     </tr>
                 );
             });
-            return users;
         }
     };
 
     return (
         <>
-            {/*<select className="border border-2 border-secondary p-1 px-3 rounded-md self-end mr-1 mb-2" placeholder="Select an office" onChange={(selected) => {*/}
-            {/*    setSelectedOffice(selected?.target.value ? selected.target.value : "All Offices");*/}
-            {/*    }}>*/}
-            {/*    {formatOptions(offices)}*/}
-            {/*</select>*/}
-                
             <table className="table-auto">
                 <thead className="thead border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0">
                     <tr className="tr">

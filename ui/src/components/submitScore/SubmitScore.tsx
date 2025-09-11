@@ -9,7 +9,6 @@ import {
 
 import './SubmitScore.css';
 
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import { I1v1GameForm, IGameForm, IUser } from "../../services/apiTypes";
 import KeycapButton from "../keycap-button/KeycapButton";
 

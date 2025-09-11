@@ -2,8 +2,6 @@ import React from "react";
 import { useFormik } from "formik";
 import { useQueryClient } from "react-query";
 import { useFetchUsers, useRegisterUser } from "../../services/apiService";
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
-import Select from "react-select";
 
 import './RegisterUser.css';
 import KeycapButton from "../keycap-button/KeycapButton";
@@ -29,20 +27,6 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
     },
   });
 
-  const offices = ["Bristol", "Newcastle"];
-
-  const formatOptions = (options: string[]) => {
-    if (options) {
-      const formattedOptions = options.map((elem) => {
-        return {
-          label: elem,
-          value: elem,
-        };
-      });
-      return formattedOptions;
-    }
-  };
-
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -64,14 +48,6 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
       if (values.username === "") {
         errors.username = "Username must not be empty";
       }
-
-      // if (!offices.includes(values.userOffice)) {
-      //   errors.userOffice = "Why are you doing this";
-      // }
-
-      // if (values.userOffice === "") {
-      //   errors.userOffice = "Please choose your home office";
-      // }
 
       return errors;
     },
@@ -100,15 +76,6 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
                   onChange={formik.handleChange}
                   maxLength={20}
                 />
-                {/*<Select*/}
-                {/*  className="border border-secondary rounded-md"*/}
-                {/*  placeholder="Office"*/}
-                {/*  options={formatOptions(offices)}*/}
-                {/*  menuPortalTarget={document.body}*/}
-                {/*  onChange={(selected) => {*/}
-                {/*    formik.setFieldValue("userOffice", selected?.value);*/}
-                {/*  }}*/}
-                {/*/>*/}
               </div>
             </div>
             {formik.errors.username ? (
