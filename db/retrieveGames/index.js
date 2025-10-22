@@ -103,7 +103,7 @@ exports.handler = async (event, context) => {
         .collection(GAMES_COLLECTION)
         .find(searchCriteria)
         .sort({ creationDate: -1 })
-        .limit(user ? 20 : 6)
+        .limit(user ? 21 : 6)
         .toArray();
 
     const response = {

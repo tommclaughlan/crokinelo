@@ -162,6 +162,9 @@ const renderRecentGames = (games: IGamesResponse, currentPlayer?: string) => {
     : [];
   if (currentPlayer) {
     processedGames = processGames(filteredGames, currentPlayer);
+    if(processedGames.length > 20){
+      processedGames.splice(-1)
+    }
   }
 
   return currentPlayer === undefined || games.length === 0 ? (
