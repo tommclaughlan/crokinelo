@@ -131,7 +131,6 @@ const processGames = (
         ? games[index + 1].newElos[currentPlayer]
         : STARTING_ELO;
     const eloDiff = currentElo - previousElo;
-
     return {
       ...game,
       eloDiff: eloDiff >= 0 ? `+${eloDiff}` : `${eloDiff}`,
@@ -143,8 +142,11 @@ const processEloForChart = (
   games: IGamesResponse,
   currentPlayer?: string
 ): ChartData[] => {
-  return games
-    .map((d) => d)
+  const gamelist : IGame[] = games.map((d) => d);
+  if (gamelist.length > 20){
+    gamelist.splice(-1)
+  }
+  return gamelist
     .reverse()
     .map((game, index) => {
       return { t: index, elo: game.newElos[currentPlayer ?? ""] };
