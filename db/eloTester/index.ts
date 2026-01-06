@@ -9,8 +9,8 @@ const K_MOD_CONST = 0.004;
 
 const MONGODB_URI = "%MONGO_SECRET%";
 
-const GAMES_COLLECTION = "games2";
-const USERS_COLLECTION = "users2";
+const GAMES_COLLECTION = "games3";
+const USERS_COLLECTION = "users3";
 
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
@@ -108,11 +108,11 @@ export async function main() {
             users.find(u => u.username === user).elo = newElos[user];
         }
 
-        db.collection("games2").updateOne({ _id: game._id }, { $set: { newElos: newElos }});
+        db.collection(GAMES_COLLECTION).updateOne({ _id: game._id }, { $set: { newElos: newElos }});
     });
 
     users.forEach(user => {
-        db.collection("users2").updateOne({ _id: user._id }, { $set: { elo: user.elo }});
+        db.collection(USERS_COLLECTION).updateOne({ _id: user._id }, { $set: { elo: user.elo }});
     });
 }
 

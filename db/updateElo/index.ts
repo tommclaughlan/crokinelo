@@ -3,8 +3,8 @@ import { Handler } from "aws-lambda";
 import { IDbGame, IDbUser, IResult, IUpdateBody } from "./types";
 import { MongoClient, Db } from "mongodb";
 
-const USER_COLLECTION = "users2";
-const GAME_COLLECTION = "games2";
+const USER_COLLECTION = "users3";
+const GAME_COLLECTION = "games3";
 
 const elo = new EloRank();
 const K_FACTOR = 5;
