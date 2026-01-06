@@ -5,8 +5,8 @@ const ObjectId = require("mongodb").ObjectId;
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";
 
-const USERS_COLLECTION = "users2";
-const GAMES_COLLECTION = "games2";
+const USERS_COLLECTION = "users3";
+const GAMES_COLLECTION = "games3";
 
 let cachedClient = null;
 let cachedDb = null;
