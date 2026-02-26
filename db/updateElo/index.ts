@@ -126,17 +126,13 @@ export const calculateElos = (results: ReadonlyArray<IResult>) => {
             result.players.length
     );
 
-    const expectedScores = [
-        elo.getExpected(teamElos[0], teamElos[1]),
-        elo.getExpected(teamElos[1], teamElos[0]),
-    ];
-
     const newElos: Record<string, number> = {};
 
     results.forEach((result, resultIndex) => {
         result.players.forEach((player) => {
+            const expectedScore = elo.getExpected(player.elo, teamElos[1 - resultIndex]);
             newElos[player.username] = elo.updateRating(
-                expectedScores[resultIndex],
+                expectedScore,
                 result.verdict,
                 player.elo
             );
@@ -215,6 +211,7 @@ export const handleSubmitedGames = (
             newElos,
             verdict: verdict,
             creationDate: new Date(),
+            newScoring: true,
         });
     });
 
