@@ -1,3 +1,5 @@
+import {ObjectId} from "mongodb";
+
 export interface IUpdateBody {
     teams: ReadonlyArray<{
         players: ReadonlyArray<string>;
@@ -11,10 +13,11 @@ export interface IDbGame {
     newElos: Record<string, number>;
     verdict: ReadonlyArray<number>;
     creationDate: Date;
+    newScoring: boolean;
 }
 
 export interface IDbUser {
-    _id: string;
+    _id: ObjectId;
     username: string;
     elo: number;
 }

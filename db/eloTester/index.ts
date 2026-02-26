@@ -1,5 +1,6 @@
 import EloRank = require("elo-rank");
-import {Db, MongoClient} from "mongodb";
+import {Db, MongoClient, WithId} from "mongodb";
+import {IDbGame, IDbUser} from "../updateElo/types";
 
 const elo = new EloRank();
 
@@ -55,7 +56,7 @@ export async function closeConnection() {
 
 export async function main() {
     const db = await connectToDatabase(true);
-    let users = await db.collection(USERS_COLLECTION)
+    let users = await db.collection<IDbUser>(USERS_COLLECTION)
         .find({})
         .toArray();
 
@@ -63,7 +64,7 @@ export async function main() {
         user.elo = STARTING_ELO
     });
 
-    let games = await db.collection(GAMES_COLLECTION)
+    let games = await db.collection<IDbGame>(GAMES_COLLECTION)
         .find({})
         .sort({ creationDate: 1 })
         .toArray();
@@ -87,22 +88,13 @@ export async function main() {
             verdict = [0, 1];
         }
 
-        const expectedScores = [
-            elo.getExpected(teamElos[0], teamElos[1]),
-            elo.getExpected(teamElos[1], teamElos[0]),
-        ];
+        let newElos: Record<string, number>;
 
-        const newElos = {};
-
-        game.teams.forEach((team, i) => {
-            team.forEach(player => {
-                newElos[player] = elo.updateRating(
-                    expectedScores[i],
-                    verdict[i],
-                    users.find(u => u.username === player).elo
-                );
-            });
-        });
+        if (game.newScoring) {
+            newElos = newScoring(game, users, teamElos, verdict);
+        } else {
+            newElos = oldScoring(game, users, teamElos, verdict);
+        }
 
         for (let user in newElos) {
             users.find(u => u.username === user).elo = newElos[user];
@@ -114,6 +106,47 @@ export async function main() {
     users.forEach(user => {
         db.collection(USERS_COLLECTION).updateOne({ _id: user._id }, { $set: { elo: user.elo }});
     });
+}
+
+function oldScoring(game: WithId<IDbGame>, users: WithId<IDbUser>[], teamElos: number[], verdict: number[]): Record<string, number> {
+    const expectedScores = [
+        elo.getExpected(teamElos[0], teamElos[1]),
+        elo.getExpected(teamElos[1], teamElos[0]),
+    ];
+
+    const newElos = {};
+
+    game.teams.forEach((team, i) => {
+        team.forEach(player => {
+            const playerElo = users.find(u => u.username === player).elo;
+            newElos[player] = elo.updateRating(
+                expectedScores[i],
+                verdict[i],
+                playerElo
+            );
+        });
+    });
+
+    return newElos;
+}
+
+function newScoring(game: WithId<IDbGame>, users: WithId<IDbUser>[], teamElos: number[], verdict: number[]): Record<string, number> {
+    const newElos = {};
+
+    game.teams.forEach((team, i) => {
+        const oppositionElo = teamElos[1 - i];
+        team.forEach(player => {
+            const playerElo = users.find(u => u.username === player).elo;
+            const expectedScore = elo.getExpected(playerElo, oppositionElo);
+            newElos[player] = elo.updateRating(
+                expectedScore,
+                verdict[i],
+                playerElo
+            );
+        });
+    });
+
+    return newElos;
 }
 
 main();
