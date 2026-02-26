@@ -1,29 +1,30 @@
 import { augmentUsers, calculateElos, handleSubmitedGames } from "./index";
-import { IResult } from "./types";
+import {IDbUser, IResult} from "./types";
+import {ObjectId} from "mongodb";
 
-const dbUsers = [
+const dbUsers: IDbUser[] = [
     {
-        _id: "1",
+        _id: new ObjectId("111111111111"),
         username: "Andy",
         elo: 1000,
     },
     {
-        _id: "2",
+        _id: new ObjectId("222222222222"),
         username: "Turbo",
         elo: 1000,
     },
     {
-        _id: "3",
+        _id: new ObjectId("333333333333"),
         username: "Neo",
         elo: 1000,
     },
     {
-        _id: "4",
+        _id: new ObjectId("444444444444"),
         username: "Casio",
         elo: 1000,
     },
     {
-        _id: "5",
+        _id: new ObjectId("555555555555"),
         username: "JK",
         elo: 1000,
     },
@@ -71,10 +72,10 @@ describe("index.ts", () => {
             const newElos = calculateElos(results);
 
             expect(Object.keys(newElos).length).toEqual(4);
-            expect(newElos[playerOneUsername]).toEqual(1032);
-            expect(newElos[playerTwoUsername]).toEqual(1032);
-            expect(newElos[playerThreeUsername]).toEqual(968);
-            expect(newElos[playerFourUsername]).toEqual(968);
+            expect(newElos[playerOneUsername]).toEqual(1036);
+            expect(newElos[playerTwoUsername]).toEqual(1036);
+            expect(newElos[playerThreeUsername]).toEqual(964);
+            expect(newElos[playerFourUsername]).toEqual(964);
         });
     });
 
@@ -98,10 +99,10 @@ describe("index.ts", () => {
             const { newElos } = handleSubmitedGames(games, dbUsers);
 
             expect(Object.keys(newElos).length).toEqual(4);
-            expect(newElos["Andy"]).toEqual(1032);
-            expect(newElos["Turbo"]).toEqual(1032);
-            expect(newElos["Casio"]).toEqual(968);
-            expect(newElos["Neo"]).toEqual(968);
+            expect(newElos["Andy"]).toEqual(1036);
+            expect(newElos["Turbo"]).toEqual(1036);
+            expect(newElos["Casio"]).toEqual(964);
+            expect(newElos["Neo"]).toEqual(964);
         });
 
         it("should return a list of updated elos - multiple games", () => {
@@ -114,10 +115,10 @@ describe("index.ts", () => {
             const { newElos } = handleSubmitedGames(games, dbUsers);
 
             expect(Object.keys(newElos).length).toEqual(4);
-            expect(newElos["Andy"]).toEqual(1080);
-            expect(newElos["Turbo"]).toEqual(1080);
-            expect(newElos["Casio"]).toEqual(920);
-            expect(newElos["Neo"]).toEqual(920);
+            expect(newElos["Andy"]).toEqual(1088);
+            expect(newElos["Turbo"]).toEqual(1088);
+            expect(newElos["Casio"]).toEqual(912);
+            expect(newElos["Neo"]).toEqual(912);
         });
 
         it("should return a list of updated elos - more than four users", () => {
@@ -130,11 +131,11 @@ describe("index.ts", () => {
             const { newElos } = handleSubmitedGames(games, dbUsers);
 
             expect(Object.keys(newElos).length).toEqual(5);
-            expect(newElos["Andy"]).toEqual(1082);
-            expect(newElos["Turbo"]).toEqual(1082);
-            expect(newElos["Casio"]).toEqual(918);
-            expect(newElos["Neo"]).toEqual(942);
-            expect(newElos["JK"]).toEqual(976);
+            expect(newElos["Andy"]).toEqual(1091);
+            expect(newElos["Turbo"]).toEqual(1091);
+            expect(newElos["Casio"]).toEqual(912);
+            expect(newElos["Neo"]).toEqual(935);
+            expect(newElos["JK"]).toEqual(971);
         });
 
         it("should throw an error if username isnt in the database", () => {
