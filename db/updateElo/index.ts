@@ -3,12 +3,13 @@ import { Handler } from "aws-lambda";
 import { IDbGame, IDbUser, IResult, IUpdateBody } from "./types";
 import { MongoClient, Db } from "mongodb";
 
-const USER_COLLECTION = "users3";
-const GAME_COLLECTION = "games3";
+const USER_COLLECTION = "users4";
+const GAME_COLLECTION = "games4";
 
 const elo = new EloRank();
-const K_FACTOR = 5;
-const K_MOD_CONST = 0.004; //  1/240
+const K_FACTOR = 20;
+const K_MAX = 55;
+const K_MOD_CONST = 0.02;
 
 // Replace the following with your Atlas connection string
 const MONGODB_URI = "%MONGO_SECRET%";
@@ -115,8 +116,7 @@ async function retrievePlayerDictionaryFromDB(
 
 export const calculateElos = (results: ReadonlyArray<IResult>) => {
     const scoreDiff = Math.abs(results[0].score - results[1].score);
-    const kFactor = K_FACTOR * (scoreDiff + 5);
-    const modKFactor = kFactor * Math.exp(-1 * scoreDiff * K_MOD_CONST);
+    const modKFactor = K_MAX - (K_MAX * Math.exp(-1 * scoreDiff * K_MOD_CONST)) + K_FACTOR;
 
     elo.setKFactor(modKFactor);
 
@@ -126,13 +126,17 @@ export const calculateElos = (results: ReadonlyArray<IResult>) => {
             result.players.length
     );
 
+    const expectedScores = [
+        elo.getExpected(teamElos[0], teamElos[1]),
+        elo.getExpected(teamElos[1], teamElos[0]),
+    ];
+
     const newElos: Record<string, number> = {};
 
     results.forEach((result, resultIndex) => {
         result.players.forEach((player) => {
-            const expectedScore = elo.getExpected(player.elo, teamElos[1 - resultIndex]);
             newElos[player.username] = elo.updateRating(
-                expectedScore,
+                expectedScores[resultIndex],
                 result.verdict,
                 player.elo
             );
@@ -211,7 +215,6 @@ export const handleSubmitedGames = (
             newElos,
             verdict: verdict,
             creationDate: new Date(),
-            newScoring: true,
         });
     });
 
