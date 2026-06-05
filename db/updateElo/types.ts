@@ -13,7 +13,7 @@ export interface IDbGame {
     newElos: Record<string, number>;
     verdict: ReadonlyArray<number>;
     creationDate: Date;
-    newScoring: boolean;
+    newScoring?: boolean;
 }
 
 export interface IDbUser {

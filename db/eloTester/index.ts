@@ -5,13 +5,14 @@ import {IDbGame, IDbUser} from "../updateElo/types";
 const elo = new EloRank();
 
 const STARTING_ELO = 1000;
-const K_FACTOR = 5;
-const K_MOD_CONST = 0.004;
+const K_FACTOR = 20;
+const K_MAX = 55;
+const K_MOD_CONST = 0.02;
 
 const MONGODB_URI = "%MONGO_SECRET%";
 
-const GAMES_COLLECTION = "games3";
-const USERS_COLLECTION = "users3";
+const GAMES_COLLECTION = "games4";
+const USERS_COLLECTION = "users4";
 
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
@@ -71,8 +72,7 @@ export async function main() {
 
     games.forEach(game => {
         const scoreDiff = (Math.abs(game.score[0] - game.score[1]));
-        const kFactor = K_FACTOR * (scoreDiff + 5);
-        const modKFactor = kFactor * Math.exp(-1 * scoreDiff * K_MOD_CONST);
+        const modKFactor = K_MAX - (K_MAX * Math.exp(-1 * scoreDiff * K_MOD_CONST)) + K_FACTOR;
 
         elo.setKFactor(modKFactor);
 
@@ -90,11 +90,7 @@ export async function main() {
 
         let newElos: Record<string, number>;
 
-        if (game.newScoring) {
-            newElos = newScoring(game, users, teamElos, verdict);
-        } else {
-            newElos = oldScoring(game, users, teamElos, verdict);
-        }
+        newElos = oldScoring(game, users, teamElos, verdict);
 
         for (let user in newElos) {
             users.find(u => u.username === user).elo = newElos[user];
