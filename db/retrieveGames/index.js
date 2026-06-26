@@ -49,16 +49,19 @@ async function closeConnection() {
     cachedDb = null;
 }
 
-async function getUser(id, isTest) {
+async function getUser(id, isTest, usersDb) {
     const db = await connectToDatabase(isTest);
 
-    return db.collection(USERS_COLLECTION).findOne({ _id: new ObjectId(id) });
+    return db.collection(usersDb).findOne({ _id: new ObjectId(id) });
 }
 
 exports.handler = async (event, context) => {
     const queries = event.queryStringParameters;
 
     const isTest = queries?.test === "true";
+
+    const gamesDb = queries?.gamesDb || GAMES_COLLECTION;
+    const usersDb = queries?.usersDb || USERS_COLLECTION;
 
     const userId = queries?.userId;
 
@@ -68,7 +71,7 @@ exports.handler = async (event, context) => {
     let user = null;
 
     if (userId) {
-        user = await getUser(userId, isTest);
+        user = await getUser(userId, isTest, usersDb);
     }
 
     if (userId && !user) {
@@ -100,7 +103,7 @@ exports.handler = async (event, context) => {
 
     const db = await connectToDatabase(isTest);
     const games = await db
-        .collection(GAMES_COLLECTION)
+        .collection(gamesDb)
         .find(searchCriteria)
         .sort({ creationDate: -1 })
         .limit(user ? 21 : 6)
