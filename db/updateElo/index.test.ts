@@ -72,10 +72,10 @@ describe("index.ts", () => {
             const newElos = calculateElos(results);
 
             expect(Object.keys(newElos).length).toEqual(4);
-            expect(newElos[playerOneUsername]).toEqual(1036);
-            expect(newElos[playerTwoUsername]).toEqual(1036);
-            expect(newElos[playerThreeUsername]).toEqual(964);
-            expect(newElos[playerFourUsername]).toEqual(964);
+            expect(newElos[playerOneUsername]).toEqual(1015);
+            expect(newElos[playerTwoUsername]).toEqual(1015);
+            expect(newElos[playerThreeUsername]).toEqual(985);
+            expect(newElos[playerFourUsername]).toEqual(985);
         });
     });
 
@@ -99,10 +99,10 @@ describe("index.ts", () => {
             const { newElos } = handleSubmitedGames(games, dbUsers);
 
             expect(Object.keys(newElos).length).toEqual(4);
-            expect(newElos["Andy"]).toEqual(1036);
-            expect(newElos["Turbo"]).toEqual(1036);
-            expect(newElos["Casio"]).toEqual(964);
-            expect(newElos["Neo"]).toEqual(964);
+            expect(newElos["Andy"]).toEqual(1015);
+            expect(newElos["Turbo"]).toEqual(1015);
+            expect(newElos["Casio"]).toEqual(985);
+            expect(newElos["Neo"]).toEqual(985);
         });
 
         it("should return a list of updated elos - multiple games", () => {
@@ -115,10 +115,10 @@ describe("index.ts", () => {
             const { newElos } = handleSubmitedGames(games, dbUsers);
 
             expect(Object.keys(newElos).length).toEqual(4);
-            expect(newElos["Andy"]).toEqual(1088);
-            expect(newElos["Turbo"]).toEqual(1088);
-            expect(newElos["Casio"]).toEqual(912);
-            expect(newElos["Neo"]).toEqual(912);
+            expect(newElos["Andy"]).toEqual(1042);
+            expect(newElos["Turbo"]).toEqual(1042);
+            expect(newElos["Casio"]).toEqual(958);
+            expect(newElos["Neo"]).toEqual(958);
         });
 
         it("should return a list of updated elos - more than four users", () => {
@@ -131,11 +131,11 @@ describe("index.ts", () => {
             const { newElos } = handleSubmitedGames(games, dbUsers);
 
             expect(Object.keys(newElos).length).toEqual(5);
-            expect(newElos["Andy"]).toEqual(1091);
-            expect(newElos["Turbo"]).toEqual(1091);
-            expect(newElos["Casio"]).toEqual(912);
-            expect(newElos["Neo"]).toEqual(935);
-            expect(newElos["JK"]).toEqual(971);
+            expect(newElos["Andy"]).toEqual(1042);
+            expect(newElos["Turbo"]).toEqual(1042);
+            expect(newElos["Casio"]).toEqual(958);
+            expect(newElos["Neo"]).toEqual(971);
+            expect(newElos["JK"]).toEqual(987);
         });
 
         it("should throw an error if username isnt in the database", () => {
