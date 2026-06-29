@@ -7,12 +7,15 @@ import {
     IUserRequest,
     IUsersResponse,
 } from "./apiTypes";
+import {useState} from "react";
 
 const requestParams: string[] = [];
 
 if (process.env.NODE_ENV !== "production") {
-    requestParams.push("test=true");
+    // requestParams.push("test=true");
 }
+
+export const CURRENT_SEASON = 4;
 
 const paramsToString = (params: ReadonlyArray<string>) =>
     params.reduce((acc, param, index) => {
@@ -27,20 +30,31 @@ const paramsToString = (params: ReadonlyArray<string>) =>
         return acc;
     }, "") ?? "";
 
-export const useFetchUsers = () =>
-    useQuery<IUsersResponse>("users", () =>
+export const useFetchUsers = (seasonId?: string) => {
+    const params = [...requestParams];
+
+    if (seasonId) {
+        params.push("usersDb=users" + seasonId);
+    }
+    return useQuery<IUsersResponse>("users", () =>
         fetch(
             `https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo/getUsers${paramsToString(
-                requestParams
+                params
             )}`
         ).then((res) => res.json())
     );
+}
 
-export const useFetchGames = (id?: string) => {
+export const useFetchGames = (id?: string, seasonId?: string) => {
     const params = [...requestParams];
 
     if (id) {
         params.push(`userId=${id}`);
+    }
+
+    if (seasonId) {
+        params.push("gamesDb=games" + seasonId);
+        params.push("usersDb=users" + seasonId);
     }
 
     const queryKey = id ? `games-${id}` : "games";
@@ -54,14 +68,20 @@ export const useFetchGames = (id?: string) => {
     );
 };
 
-export const useFetchAllStats = () =>
-    useQuery<AllStatsResponse>("allStats", () =>
+export const useFetchAllStats = (seasonId?: string) => {
+    const params = [...requestParams];
+
+    if (seasonId) {
+        params.push("gamesDb=games" + seasonId);
+    }
+    return useQuery<AllStatsResponse>("allStats", () =>
         fetch(
             `https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo/retrieveAllStats${paramsToString(
-                requestParams
+                params
             )}`
         ).then((res) => res.json())
     );
+}
 
 export const useRegisterUser = (
     options:

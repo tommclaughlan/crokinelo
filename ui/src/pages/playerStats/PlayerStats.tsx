@@ -187,15 +187,15 @@ const renderRecentGames = (games: IGamesResponse, currentPlayer?: string) => {
 };
 
 function PlayerStats() {
-  const { id } = useParams();
+  const { id, seasonId } = useParams();
   const navigate = useNavigate();
 
   const [user, setUser] = useState<IUser | null>(null);
   const [userStats, setUserStats] = useState<IAllStats | null>(null);
 
-  const { data: users, isFetching } = useFetchUsers();
-  const { data: stats } = useFetchAllStats();
-  const { data: games, isFetching: isGamesFetching } = useFetchGames(id);
+  const { data: users, isFetching } = useFetchUsers(seasonId);
+  const { data: stats } = useFetchAllStats(seasonId);
+  const { data: games, isFetching: isGamesFetching } = useFetchGames(id, seasonId);
 
   const avatar = useMemo(() => {
     return createAvatar(bottts, {

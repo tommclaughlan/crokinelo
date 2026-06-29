@@ -5,6 +5,10 @@ import "./Scoreboard.css";
 import {IUser} from "../../services/apiTypes";
 import FormList from "../formList/FormList";
 
+interface ScoreboardProps {
+    seasonId?: string;
+}
+
 const getIcon = (index: number) => {
     switch (index) {
         case 1:
@@ -20,13 +24,18 @@ const getIcon = (index: number) => {
 
 const formatWinPercentage = (winPer: number) => `${(winPer * 100).toFixed(2)}%`;
 
-const Scoreboard = () => {
-    const { isLoading: isUsersLoading, data: userData } = useFetchUsers();
-    const { isLoading: isStatsLoading, data: statData } = useFetchAllStats();
+const Scoreboard = ({ seasonId }: ScoreboardProps) => {
+    const { isLoading: isUsersLoading, data: userData } = useFetchUsers(seasonId);
+    const { isLoading: isStatsLoading, data: statData } = useFetchAllStats(seasonId);
     const navigate = useNavigate();
 
     const handleRowClicked = (rowData: IUser) => {
-        navigate(`/player/${rowData._id}`);
+        if (seasonId) {
+            navigate(`/season/${seasonId}/player/${rowData._id}`);
+        }
+        else {
+            navigate(`/player/${rowData._id}`);
+        }
     };
 
     const renderScoreboard = () => {
