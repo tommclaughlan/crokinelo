@@ -19,8 +19,6 @@ function Page({ children }: PageProps) {
     const [showRules, setShowRules] = useState(false);
     const seasonId = useParams().seasonId;
 
-    console.log(seasonId);
-
     const handleSeasonSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const season = event.target.value;
         if (parseInt(season) === CURRENT_SEASON) {

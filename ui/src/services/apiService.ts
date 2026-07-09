@@ -12,7 +12,7 @@ import {useState} from "react";
 const requestParams: string[] = [];
 
 if (process.env.NODE_ENV !== "production") {
-    // requestParams.push("test=true");
+    requestParams.push("test=true");
 }
 
 export const CURRENT_SEASON = 4;
