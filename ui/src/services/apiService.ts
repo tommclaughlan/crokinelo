@@ -7,7 +7,6 @@ import {
     IUserRequest,
     IUsersResponse,
 } from "./apiTypes";
-import {useState} from "react";
 
 const requestParams: string[] = [];
 
