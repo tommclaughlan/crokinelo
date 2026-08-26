@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint_frontend:
+    name: Lint front-end
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          cd ui
+          npm install
+      - name: Run lint
+        run: |
+          cd ui
+          npm run lint
+
+  lint_backend:
+    name: Lint and test backend Lambda functions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: updateElo type check and tests
+        run: |
+          cd db/updateElo
+          npm install
+          npm run compile
+          npm test

@@ -13,12 +13,6 @@ import {
 } from "../../services/apiService";
 import { IAllStats, IGame, IGamesResponse, IUser } from "../../services/apiTypes";
 
-const STARTING_ELO = 1000;
-
-interface IGameStats extends IGame {
-	eloDiff: string;
-}
-
 interface IPointTotals {
 	pointsFor: number;
 	pointsAgainst: number;
