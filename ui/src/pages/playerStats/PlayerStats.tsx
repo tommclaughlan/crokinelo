@@ -192,6 +192,7 @@ function PlayerStats() {
 
   const [user, setUser] = useState<IUser | null>(null);
   const [userStats, setUserStats] = useState<IAllStats | null>(null);
+  const [comparePlayerId, setComparePlayerId] = useState("");
 
   const { data: users, isFetching } = useFetchUsers(seasonId);
   const { data: stats } = useFetchAllStats(seasonId);
@@ -204,9 +205,21 @@ function PlayerStats() {
     }).toDataUri();
   }, [user?.username]);
 
+  const compareOptions = useMemo(
+    () =>
+      (users ?? []).filter(
+        (candidate) => candidate._id !== user?._id && candidate.username !== user?.username
+      ),
+    [user?._id, user?.username, users]
+  );
+
   useEffect(() => {
     setUserStats((user && stats && stats[user.username]) ?? null);
   }, [user, setUserStats, stats]);
+
+  useEffect(() => {
+    setComparePlayerId(compareOptions[0]?._id ?? "");
+  }, [compareOptions]);
 
   useEffect(() => {
     if (isFetching || !users || !id) {
@@ -227,6 +240,18 @@ function PlayerStats() {
     userStats?.results && userStats.results.length > 0
       ? formatDate(userStats.results[0].creationDate)
       : "-";
+
+  const handleComparePlayer = () => {
+    if (!id || !comparePlayerId) {
+      return;
+    }
+
+    const comparePath = seasonId
+      ? `/season/${seasonId}/compare/${id}/${comparePlayerId}`
+      : `/compare/${id}/${comparePlayerId}`;
+
+    navigate(comparePath);
+  };
 
   let setsFor: number = 0;
   let setsAgainst: number = 0;
@@ -286,6 +311,32 @@ function PlayerStats() {
                 <EloChart
                   data={processEloForChart(games ?? [], user?.username)}
                 ></EloChart>
+              </div>
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+                <select
+                  aria-label="Compare to another player"
+                  className="w-full rounded-md border border-secondary bg-white px-3 py-2 text-base"
+                  onChange={(event) => setComparePlayerId(event.target.value)}
+                  value={comparePlayerId}
+                >
+                  {compareOptions.length === 0 ? (
+                    <option value="">No other players available</option>
+                  ) : (
+                    compareOptions.map((candidate) => (
+                      <option key={candidate._id} value={candidate._id}>
+                        {candidate.username}
+                      </option>
+                    ))
+                  )}
+                </select>
+                <button
+                  className="rounded-md border border-secondary px-4 py-2 font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+                  disabled={!comparePlayerId}
+                  onClick={handleComparePlayer}
+                  type="button"
+                >
+                  Compare Player
+                </button>
               </div>
             </div>
             <div className="ml-4">
