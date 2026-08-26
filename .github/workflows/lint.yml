@@ -18,7 +18,7 @@ jobs:
       - name: Run lint
         run: |
           cd ui
-          npm run lint
+          npm run lint -- --max-warnings=0
 
   lint_backend:
     name: Lint and test backend Lambda functions
