@@ -49,16 +49,6 @@ const formatDate = (date: string) => new Date(date).toLocaleDateString("en-UK");
 const formatTime = (date: string) =>
 	new Date(date).toLocaleTimeString("en-UK").slice(0, 5);
 
-const getEloColor = (eloDiff: string) => {
-	if (eloDiff === "+0") {
-		return "text-black";
-	}
-	if (eloDiff[0] === "+") {
-		return "text-accent-green";
-	}
-	return "text-accent-red";
-};
-
 const PlayerDetail = ({
 	label,
 	children,
@@ -71,26 +61,6 @@ const PlayerDetail = ({
 		<div className="player-overview-value text-xl truncate max-w-full">{children}</div>
 	</div>
 );
-
-const processGames = (games: IGamesResponse, currentPlayer: string): IGameStats[] => {
-	return games
-		.filter(
-			(game) =>
-				game.teams[0].includes(currentPlayer) || game.teams[1].includes(currentPlayer)
-		)
-		.slice(0, 20)
-		.map((game, index, arr) => {
-			const currentElo = game.newElos[currentPlayer];
-			const previousElo =
-				index < arr.length - 1 ? arr[index + 1].newElos[currentPlayer] : STARTING_ELO;
-			const eloDiff = currentElo - previousElo;
-
-			return {
-				...game,
-				eloDiff: eloDiff >= 0 ? `+${eloDiff}` : `${eloDiff}`,
-			};
-		});
-};
 
 const processEloForChart = (
 	games: IGamesResponse,
@@ -234,57 +204,6 @@ const getLastGameDate = (stats?: IAllStats | null) => {
 		return "-";
 	}
 	return formatDate(stats.results[0].creationDate);
-};
-
-const GameRow = ({
-	game,
-	player,
-	elo,
-	eloDiff,
-}: {
-	game: IGame;
-	player?: string;
-	elo: number;
-	eloDiff: string;
-}) => {
-	const allPlayers = [...game.teams[0], ...game.teams[1]];
-	const playerIndex = player ? allPlayers.findIndex((username) => username === player) : -1;
-	const isOneVOne = game.teams[0].length === 1 && game.teams[1].length === 1;
-
-	return (
-		<div className="grid mb:grid-rows-4 sm:grid-cols-9 mb-4 gap-3 border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0 justify-center">
-			<div className="sm:col-span-6">
-				<div className="text-lg grid grid-cols-3 game-results">
-					<div className="no-wrap team-one">
-						<div className={playerIndex === 0 ? "truncate font-bold" : "truncate"}>
-							{game.teams[0][0]}
-						</div>
-						{isOneVOne ? null : <div className="invisible sm:visible">&nbsp;&amp;&amp;&nbsp;</div>}
-						<div className={playerIndex === 1 ? "truncate font-bold" : "truncate"}>
-							{game.teams[0][1]}
-						</div>
-					</div>
-					<div className="no-wrap score text-2xl">{`${game.score[0]}-${game.score[1]}`}</div>
-					<div className="no-wrap team-two">
-						<div className={playerIndex === 2 ? "truncate font-bold" : "truncate"}>
-							{game.teams[1][0]}
-						</div>
-						{isOneVOne ? null : <div className="is-hidden-mobile">&nbsp;&amp;&amp;&nbsp;</div>}
-						<div className={playerIndex === 3 ? "truncate font-bold" : "truncate"}>
-							{game.teams[1][1]}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="text-3xl text-center">{elo}</div>
-			<div className="text-xl text-center">
-				<span className={getEloColor(eloDiff)}>{eloDiff}</span>
-			</div>
-			<div className="text-base text-center">
-				{`${formatDate(game.creationDate)} - ${formatTime(game.creationDate)}`}
-			</div>
-		</div>
-	);
 };
 
 const SharedGameRow = ({ game, playerOne, playerTwo }: { game: IGame; playerOne?: string; playerTwo?: string }) => {
