@@ -32,6 +32,19 @@ interface IHeadToHeadSummary {
 }
 
 const formatWinPercentage = (winPer: number) => `${(winPer * 100).toFixed(2)}%`;
+const formatSignedNumber = (value: number, decimals = 0) => {
+	const sign = value > 0 ? "+" : "";
+	return `${sign}${value.toFixed(decimals)}`;
+};
+
+const defaultDifferenceFormatter = (left: number, right: number) => {
+	if (Number.isInteger(left) && Number.isInteger(right)) {
+		return formatSignedNumber(left - right, 0);
+	}
+
+	return formatSignedNumber(left - right, 2);
+};
+
 const formatDate = (date: string) => new Date(date).toLocaleDateString("en-UK");
 const formatTime = (date: string) =>
 	new Date(date).toLocaleTimeString("en-UK").slice(0, 5);
@@ -312,6 +325,7 @@ const CombinedStatLine = ({
 	leftCompareValue,
 	rightCompareValue,
 	preferLowerBetter = false,
+	differenceFormatter,
 }: {
 	label: string;
 	leftValue?: React.ReactNode;
@@ -319,8 +333,32 @@ const CombinedStatLine = ({
 	leftCompareValue?: number;
 	rightCompareValue?: number;
 	preferLowerBetter?: boolean;
-}) => (
-	<div className="grid grid-cols-3 gap-3 items-center border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0 py-2">
+	differenceFormatter?: (left: number, right: number) => string;
+}) => {
+	const hasComparableValues =
+		leftCompareValue !== undefined && rightCompareValue !== undefined;
+
+	const rawDifference = hasComparableValues
+		? leftCompareValue - rightCompareValue
+		: undefined;
+
+	const differenceText = hasComparableValues
+		? differenceFormatter
+			? differenceFormatter(leftCompareValue, rightCompareValue)
+			: defaultDifferenceFormatter(leftCompareValue, rightCompareValue)
+		: "-";
+
+	const differenceColorClass =
+		!hasComparableValues || rawDifference === 0
+			? "text-black"
+			: rawDifference !== undefined &&
+			  (preferLowerBetter ? rawDifference < 0 : rawDifference > 0)
+			? "text-accent-green"
+			: "text-accent-red";
+
+	return (
+	<div className="grid grid-cols-4 gap-3 items-center border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0 py-2">
+		<div className="text-left text-base font-semibold truncate">{label}</div>
 		<div
 			className={`text-center text-xl truncate ${
 				leftCompareValue === undefined || rightCompareValue === undefined
@@ -338,7 +376,9 @@ const CombinedStatLine = ({
 		>
 			{leftValue}
 		</div>
-		<div className="text-center text-base font-semibold">{label}</div>
+		<div className="text-center leading-tight">
+			<div className={`text-xl ${differenceColorClass}`}>{differenceText}</div>
+		</div>
 		<div
 			className={`text-center text-xl truncate ${
 				leftCompareValue === undefined || rightCompareValue === undefined
@@ -357,7 +397,8 @@ const CombinedStatLine = ({
 			{rightValue}
 		</div>
 	</div>
-);
+	);
+};
 
 const PlayerPanel = ({
 	user,
@@ -396,6 +437,7 @@ const PlayerPanel = ({
 					<PlayerDetail label="Username">{user?.username ?? "-"}</PlayerDetail>
 					<PlayerDetail label="Elo">{user?.elo ?? 0}</PlayerDetail>
 					<PlayerDetail label="Last Game">{getLastGameDate(userStats)}</PlayerDetail>
+					<PlayerDetail label="Form"><FormList results={userStats?.results || []} /></PlayerDetail>
 				</div>
 			</div>
 
@@ -410,9 +452,6 @@ const PlayerPanel = ({
 				<div className="mt-4">
 					<PlayerDetail label="Games Played">{userStats?.gamesCount ?? 0}</PlayerDetail>
 					<PlayerDetail label="Win Rate">{formatWinPercentage(userStats?.winPer ?? 0)}</PlayerDetail>
-					<PlayerDetail label="Form">
-						<FormList results={userStats?.results || []} />
-					</PlayerDetail>
 					<PlayerDetail label="Points Won">{points.pointsFor}</PlayerDetail>
 					<PlayerDetail label="Points Conceded">{points.pointsAgainst}</PlayerDetail>
 					<PlayerDetail label="Point Difference">{points.pointsFor - points.pointsAgainst}</PlayerDetail>
@@ -574,6 +613,12 @@ function PlayerComparison() {
 					</div>
 
 					<div className="mt-4">
+						<div className="grid grid-cols-4 gap-3 items-center border border-border-lilac border-b-1 border-t-0 border-r-0 border-l-0 py-2">
+							<div className="text-left text-base font-semibold">Stat</div>
+							<div className="text-center text-base font-semibold truncate">{playerOne.username}</div>
+							<div className="text-center text-base font-semibold">Diff</div>
+							<div className="text-center text-base font-semibold truncate">{playerTwo.username}</div>
+						</div>
 						<CombinedStatLine
 							label="Elo"
 							leftValue={playerOne.elo}
@@ -594,11 +639,9 @@ function PlayerComparison() {
 							rightValue={formatWinPercentage(playerTwoStats?.winPer ?? 0)}
 							leftCompareValue={playerOneStats?.winPer ?? 0}
 							rightCompareValue={playerTwoStats?.winPer ?? 0}
-						/>
-						<CombinedStatLine
-							label="Form"
-							leftValue={<FormList results={playerOneStats?.results || []} />}
-							rightValue={<FormList results={playerTwoStats?.results || []} />}
+							differenceFormatter={(left, right) =>
+								`${formatSignedNumber((left - right) * 100, 2)} pp`
+							}
 						/>
 						<CombinedStatLine
 							label="Points Won"
