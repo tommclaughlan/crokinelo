@@ -12,6 +12,8 @@ import './SubmitScore.css';
 import { I1v1GameForm, IGameForm, IUser } from "../../services/apiTypes";
 import KeycapButton from "../keycap-button/KeycapButton";
 
+const unused = null;
+
 const gameFormToGameRequest = (game: IGameForm) => ({
   teams: [
     {
