@@ -57,6 +57,8 @@ export type AllStatsResponse = Record<string, IAllStats>;
 export interface IAllStats {
     gamesCount: number;
     wins: number;
+    ties: number;
+    losses: number;
     winPer: number;
     results: ReadonlyArray<IStatResult>;
 }
@@ -66,5 +68,6 @@ export interface IStatResult {
     creationDate: string;
     username: string;
     myScore: number;
+    opponentScore: number;
     myVerdict: number;
 }

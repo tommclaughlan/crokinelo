@@ -1,34 +1,41 @@
 .form-result {
     display: inline-block;
     height: 24px;
-    width: 24px;
+    width: 14px;
     vertical-align: middle;
     text-align: center;
     line-height: 22px !important;
-    margin-right: 4px;
     color: #fff;
     font-weight: 400;
-    border-radius: 5px;
-    border: 2px solid var(--tertiary-color);
+    border-radius: 1px;
+}
+
+.none {
+    background: var(--grey-color);
 }
 
 .win {
-    background: linear-gradient(var(--accent-green-light), var(--accent-green), var(--accent-green-dark));
+    background: var(--accent-green);
 }
 
 .tie {
-    background: linear-gradient(var(--accent-yellow-light), var(--accent-yellow), var(--accent-yellow-dark));
+    background: var(--accent-yellow);
 }
 
 .loss {
-    background: linear-gradient(var(--accent-red-light), var(--accent-red), var(--accent-red-dark));
+    background: var(--accent-red);
+}
+
+@media only screen and (min-width: 768px) {
+    .form-result {
+        height: 18px;
+        width: 12px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     .form-result {
         height: 18px;
-        width: 18px;
-        border: 1px solid var(--tertiary-color);
-        margin-right: 2px;
+        width: 10px;
     }
 }

@@ -10,7 +10,7 @@ import {
 import './SubmitScore.css';
 
 import { I1v1GameForm, IGameForm, IUser } from "../../services/apiTypes";
-import KeycapButton from "../keycap-button/KeycapButton";
+import SubmitButton from "../submit-button/SubmitButton";
 
 
 const gameFormToGameRequest = (game: IGameForm) => ({
@@ -244,7 +244,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
           </form>
         </section>
         <footer className="border-t border-secondary text-right p-2">
-            <KeycapButton onClick={formik.submitForm} text={"Submit"} disabled={isPostLoading} />
+            <SubmitButton onClick={formik.submitForm} text={"Submit"} disabled={isPostLoading} />
         </footer>
       </div>
     </div>
