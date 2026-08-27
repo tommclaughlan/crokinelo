@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Scoreboard from "../../components/scoreboard/Scoreboard";
+import AgScoreboard from "../../components/ag-scoreboard/AgScoreboard";
 import Modal from "../../components/modal/Modal";
 import RegisterUser from "../../components/registerUser/RegisterUser";
 import SubmitScore from "../../components/submitScore/SubmitScore";
@@ -7,7 +7,7 @@ import LatestGamesTicker from "../../components/latestGames/LatestGamesTicker";
 import Page from "../../layouts/Page";
 
 import "./Home.css";
-import KeycapButton from "../../components/keycap-button/KeycapButton";
+import SubmitButton from "../../components/submit-button/SubmitButton";
 
 function Home() {
   const [showRegister, setShowRegister] = useState(false);
@@ -30,12 +30,12 @@ function Home() {
       </Modal>
         <div className="pb-10">
           <Page>
-            <div className=" py-5 flex flex-col sm:flex-row">
-                <KeycapButton onClick={() => setShowSubmit1v1Score(true)} text={"Submit 1v1"} />
-                <KeycapButton onClick={() => setShowSubmitScore(true)} text={"Submit 2v2"} />
-                <KeycapButton onClick={() => setShowRegister(true)} text={"Register"} type={"secondary"} />
+            <div className=" py-5 flex flex-col sm:flex-row gap-5">
+                <SubmitButton onClick={() => setShowSubmit1v1Score(true)} text={"Submit 1v1"} />
+                <SubmitButton onClick={() => setShowSubmitScore(true)} text={"Submit 2v2"} />
+                <SubmitButton onClick={() => setShowRegister(true)} text={"Register"} type={"secondary"} />
             </div>
-            <Scoreboard />
+            <AgScoreboard />
           </Page>
         </div>
       <LatestGamesTicker />

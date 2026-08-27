@@ -78,6 +78,11 @@ exports.handler = async (event, context) => {
                     },
                     myVerdict: {
                         $arrayElemAt: ["$verdict", "$teamIndex"]
+                    },
+                    opponentScore: {
+                        $arrayElemAt: ["$score", {
+                            $subtract: [1, "$teamIndex"]
+                        }]
                     }
                 },
             },

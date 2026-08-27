@@ -4,7 +4,7 @@ import { useQueryClient } from "react-query";
 import { useFetchUsers, useRegisterUser } from "../../services/apiService";
 
 import './RegisterUser.css';
-import KeycapButton from "../keycap-button/KeycapButton";
+import SubmitButton from "../submit-button/SubmitButton";
 
 interface RegisterUserProps {
   setShowRegister: (isShown: boolean) => void;
@@ -91,7 +91,7 @@ function RegisterUser({ setShowRegister }: RegisterUserProps) {
           </form>
         </section>
         <footer className="border-t border-secondary text-right p-2">
-            <KeycapButton onClick={formik.submitForm} text={"Register"} type={"secondary"} disabled={isPostLoading} />
+            <SubmitButton onClick={formik.submitForm} text={"Register"} type={"secondary"} disabled={isPostLoading} />
         </footer>
       </div>
     </div>
