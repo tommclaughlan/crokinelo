@@ -132,7 +132,7 @@ const AgScoreboard = ({ seasonId }: AgScoreboardProps) => {
             navigate(`/season/${seasonId}/player/${rowData._id}`);
         }
         else {
-            navigate(`/user/${rowData._id}`);
+            navigate(`/player/${rowData._id}`);
         }
     }
 
