@@ -1,16 +1,16 @@
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
-import './KeycapButton.css';
+import './SubmitButton.css';
 
-interface KeycapButtonProps {
+interface SubmitButtonProps {
     onClick: () => void;
     text: string;
     disabled?: boolean;
     type?: string;
 }
 
-const KeycapButton = ({ onClick, text, disabled, type }: KeycapButtonProps) => {
-    let className = "keycap-button";
+const SubmitButton = ({ onClick, text, disabled, type }: SubmitButtonProps) => {
+    let className = "submit-button";
 
     if (type) {
         className += " " + type;
@@ -34,4 +34,4 @@ const KeycapButton = ({ onClick, text, disabled, type }: KeycapButtonProps) => {
     )
 }
 
-export default KeycapButton;
+export default SubmitButton;

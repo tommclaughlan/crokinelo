@@ -8,7 +8,7 @@ interface ModalProps {
 }
 
 const Modal = ({ handleClose, show, children }: ModalProps) => {
-    const showHideClassName = show ? "flex w-screen h-screen flex-col fixed justify-center items-center" : "hidden";
+    const showHideClassName = show ? "flex w-screen h-screen flex-col fixed justify-center items-center z-50" : "hidden";
 
     return (
         <div className={showHideClassName}>

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { QUOTES } from "./constants";
-import { ReactComponent as HomeSvg } from '../icons/home-solid.svg';
+import { ReactComponent as HomeSvg } from '../icons/home-icon.svg';
 
 import "./Page.css";
 import {useNavigate, useParams} from "react-router-dom";

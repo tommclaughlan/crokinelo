@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import Page from "../../layouts/Page";
-import Scoreboard from "../../components/scoreboard/Scoreboard";
+import AgScoreboard from "../../components/ag-scoreboard/AgScoreboard";
 
 
 function SeasonStats() {
@@ -10,7 +10,7 @@ function SeasonStats() {
         <div className="pb-10" key={id}>
             <Page>
                 <h1 className="h-14 text-4xl p-3">Season {id} scoreboard</h1>
-                <Scoreboard seasonId={id}/>
+                <AgScoreboard seasonId={id}/>
             </Page>
         </div>
     );
