@@ -184,6 +184,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                     placeholder="Player One"
                     menuPortalTarget={document.body}
                     options={formatOptions(users ?? [])}
+                    styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                     onChange={(selected) => {
                       formik.setFieldValue("teamOnePlayerOne", selected?.value);
                     }}
@@ -196,6 +197,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                       placeholder="Player Two"
                       menuPortalTarget={document.body}
                       options={formatOptions(users ?? [])}
+                      styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                       onChange={(selected) => {
                         formik.setFieldValue(
                           "teamOnePlayerTwo",
@@ -213,6 +215,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                     placeholder={is1v1 ? "Player Two" : "Player One"}
                     menuPortalTarget={document.body}
                     options={formatOptions(users ?? [])}
+                    styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                     onChange={(selected) => {
                       formik.setFieldValue("teamTwoPlayerOne", selected?.value);
                     }}
@@ -225,6 +228,7 @@ function SubmitScore({ setShowSubmitScore, is1v1 }: SubmitScoreProps) {
                       placeholder="Player Two"
                       menuPortalTarget={document.body}
                       options={formatOptions(users ?? [])}
+                      styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                       onChange={(selected) => {
                         formik.setFieldValue(
                           "teamTwoPlayerTwo",
