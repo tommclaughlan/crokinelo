@@ -8,14 +8,14 @@ const demoUsers = [
 ];
 
 const demoGames = [
-  { teams: [["Alex Morgan", "Jamie Taylor"], ["Casey Lee", "Riley Jordan"]], score: [8, 4], verdict: [1, 0], newElos: { "Alex Morgan": 1142, "Jamie Taylor": 1086, "Casey Lee": 1018, "Riley Jordan": 954 } },
+  { teams: [["Alex Morgan", "Jamie Taylor"], ["Casey Lee", "Riley Jordan"]], score: [10, 5], verdict: [1, 0], newElos: { "Alex Morgan": 1142, "Jamie Taylor": 1086, "Casey Lee": 1018, "Riley Jordan": 954 } },
   { teams: [["Sam Patel"], ["Morgan Reed"]], score: [5, 5], verdict: [0.5, 0.5], newElos: { "Sam Patel": 1000, "Morgan Reed": 1000 } },
-  { teams: [["Alex Morgan", "Casey Lee"], ["Jamie Taylor", "Riley Jordan"]], score: [3, 7], verdict: [0, 1], newElos: { "Alex Morgan": 1142, "Casey Lee": 1018, "Jamie Taylor": 1086, "Riley Jordan": 954 } },
-  { teams: [["Jamie Taylor"], ["Sam Patel"]], score: [6, 2], verdict: [1, 0], newElos: { "Jamie Taylor": 1086, "Sam Patel": 1000 } },
-  { teams: [["Alex Morgan", "Riley Jordan"], ["Casey Lee", "Morgan Reed"]], score: [4, 6], verdict: [0, 1], newElos: { "Alex Morgan": 1142, "Riley Jordan": 954, "Casey Lee": 1018, "Morgan Reed": 1000 } },
-  { teams: [["Casey Lee"], ["Riley Jordan"]], score: [5, 3], verdict: [1, 0], newElos: { "Casey Lee": 1018, "Riley Jordan": 954 } },
-  { teams: [["Alex Morgan", "Sam Patel"], ["Jamie Taylor", "Morgan Reed"]], score: [7, 2], verdict: [1, 0], newElos: { "Alex Morgan": 1142, "Sam Patel": 1000, "Jamie Taylor": 1086, "Morgan Reed": 1000 } },
-  { teams: [["Sam Patel"], ["Casey Lee"]], score: [1, 4], verdict: [0, 1], newElos: { "Sam Patel": 1000, "Casey Lee": 1018 } },
+  { teams: [["Alex Morgan", "Casey Lee"], ["Jamie Taylor", "Riley Jordan"]], score: [5, 10], verdict: [0, 1], newElos: { "Alex Morgan": 1142, "Casey Lee": 1018, "Jamie Taylor": 1086, "Riley Jordan": 954 } },
+  { teams: [["Jamie Taylor"], ["Sam Patel"]], score: [10, 5], verdict: [1, 0], newElos: { "Jamie Taylor": 1086, "Sam Patel": 1000 } },
+  { teams: [["Alex Morgan", "Riley Jordan"], ["Casey Lee", "Morgan Reed"]], score: [5, 10], verdict: [0, 1], newElos: { "Alex Morgan": 1142, "Riley Jordan": 954, "Casey Lee": 1018, "Morgan Reed": 1000 } },
+  { teams: [["Casey Lee"], ["Riley Jordan"]], score: [5, 0], verdict: [1, 0], newElos: { "Casey Lee": 1018, "Riley Jordan": 954 } },
+  { teams: [["Alex Morgan", "Sam Patel"], ["Jamie Taylor", "Morgan Reed"]], score: [10, 5], verdict: [1, 0], newElos: { "Alex Morgan": 1142, "Sam Patel": 1000, "Jamie Taylor": 1086, "Morgan Reed": 1000 } },
+  { teams: [["Sam Patel"], ["Casey Lee"]], score: [0, 5], verdict: [0, 1], newElos: { "Sam Patel": 1000, "Casey Lee": 1018 } },
 ].map((game, index) => ({
   ...game,
   creationDate: new Date(Date.now() - index * 86400000),
