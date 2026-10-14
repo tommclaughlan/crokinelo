@@ -14,6 +14,10 @@ if (process.env.NODE_ENV !== "production") {
     requestParams.push("test=true");
 }
 
+const API_BASE_URL =
+    process.env.REACT_APP_API_BASE_URL ??
+    "https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo";
+
 export const CURRENT_SEASON = 4;
 
 const paramsToString = (params: ReadonlyArray<string>) =>
@@ -37,9 +41,7 @@ export const useFetchUsers = (seasonId?: string) => {
     }
     return useQuery<IUsersResponse>("users", () =>
         fetch(
-            `https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo/getUsers${paramsToString(
-                params
-            )}`
+            `${API_BASE_URL}/getUsers${paramsToString(params)}`
         ).then((res) => res.json())
     );
 }
@@ -60,9 +62,7 @@ export const useFetchGames = (id?: string, seasonId?: string) => {
 
     return useQuery<IGamesResponse>(queryKey, () =>
         fetch(
-            `https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo/retrieveGames${paramsToString(
-                params
-            )}`
+            `${API_BASE_URL}/retrieveGames${paramsToString(params)}`
         ).then((res) => res.json())
     );
 };
@@ -75,9 +75,7 @@ export const useFetchAllStats = (seasonId?: string) => {
     }
     return useQuery<AllStatsResponse>("allStats", () =>
         fetch(
-            `https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo/retrieveAllStats${paramsToString(
-                params
-            )}`
+            `${API_BASE_URL}/retrieveAllStats${paramsToString(params)}`
         ).then((res) => res.json())
     );
 }
@@ -93,14 +91,13 @@ export const useRegisterUser = (
     useMutation<IUsersResponse, string, IUserRequest>(
         (user) =>
             fetch(
-                `https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo/registerUser${paramsToString(
-                    requestParams
-                )}`,
+                `${API_BASE_URL}/registerUser${paramsToString(requestParams)}`,
                 {
                     mode: "cors",
                     method: "POST",
                     headers: {
                         Accept: "application/json",
+                        "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
                         username: user.username,
@@ -127,14 +124,13 @@ export const useSubmitResult = (
     useMutation<IUpdateResponse, string, ReadonlyArray<IGameRequest>>(
         (games) => {
             return fetch(
-                `https://t6jhp0e39a.execute-api.eu-west-1.amazonaws.com/default/elo/updateElo${paramsToString(
-                    requestParams
-                )}`,
+                `${API_BASE_URL}/updateElo${paramsToString(requestParams)}`,
                 {
                     mode: "cors",
                     method: "POST",
                     headers: {
                         Accept: "application/json",
+                        "Content-Type": "application/json",
                     },
                     body: JSON.stringify(games),
                 }
