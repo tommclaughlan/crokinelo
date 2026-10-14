@@ -2,7 +2,7 @@
 const MongoClient = require("mongodb").MongoClient;
 
 // Replace the following with your Atlas connection string
-const MONGODB_URI = "%MONGO_SECRET%";
+const MONGODB_URI = process.env.MONGODB_URI || "%MONGO_SECRET%";
 
 const USERS_COLLECTION = "users4";
 

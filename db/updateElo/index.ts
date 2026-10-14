@@ -12,7 +12,7 @@ const K_MAX = 55;
 const K_MOD_CONST = 0.02;
 
 // Replace the following with your Atlas connection string
-const MONGODB_URI = "%MONGO_SECRET%";
+const MONGODB_URI = process.env.MONGODB_URI || "%MONGO_SECRET%";
 
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
